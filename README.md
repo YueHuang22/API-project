@@ -49,8 +49,8 @@ Returns the information about the current user that is logged in.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/current-session-user
   * Body: none
 
 * Successful Response
@@ -75,8 +75,8 @@ information.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /api/login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -141,8 +141,8 @@ user's information.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /api/signup
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -212,8 +212,8 @@ Returns all the groups.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/groups
   * Body: none
 
 * Successful Response
@@ -249,8 +249,8 @@ Returns all the groups.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/:userId
   * Body: none
 
 * Successful Response
@@ -286,8 +286,8 @@ Returns the details of a group specified by its id.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/groups/:groupId
   * Body: none
 
 * Successful Response
@@ -339,8 +339,8 @@ Creates and returns a new group.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /api/groups
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -405,8 +405,8 @@ Updates and returns an existing group.
 * Require Authentication: true
 * Require proper authorization: Group must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: PUT
+  * URL: /api/groups/:groupId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -484,8 +484,8 @@ Deletes an existing group.
 * Require Authentication: true
 * Require proper authorization: Group must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: DELETE
+  * URL: /api/groups/:groupId
   * Body: none
 
 * Successful Response
@@ -520,8 +520,8 @@ Returns the members of a group specified by its id.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/groups/:groupId/members
   * Body: none
 
 * Successful Response: If you ARE the organizer of the group. Shows all
@@ -611,8 +611,8 @@ Request a new membership for a group specified by id.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /api/groups/:groupId/membership
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -679,7 +679,7 @@ Change the status of a membership for a group specified by id.
 * Require proper authorization: Current User must already be the organizer or
   have a membership to the group with the status of "co-host"
 * Request
-  * Method: ?
+  * Method: PUT
   * URL: ?
   * Headers:
     * Content-Type: application/json
