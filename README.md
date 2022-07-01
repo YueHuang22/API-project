@@ -644,7 +644,7 @@ Request a new membership for a group specified by id.
 - Request
 
   - Method: POST
-  - URL: /api/groups/:groupId/membership
+  - URL: /api/groups/:groupId/members
   - Headers:
     - Content-Type: application/json
   - Body: none
@@ -717,7 +717,7 @@ Change the status of a membership for a group specified by id.
 - Request
 
   - Method: PUT
-  - URL: /api/groups/:groupId/members/:memberId/edit
+  - URL: /api/groups/:groupId/members/:memberId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -827,11 +827,11 @@ Delete a membership to a group specified by id.
 - Request
 
   - Method: DELETE
-  - URL: /api/groups/:groupId/members/:memberId/delete
+  - URL: /api/groups/:groupId/members/:memberId
   - Headers:
     - Content-Type: application/json
   - Body:
-
+    - **??DON'T NEED BODY??**
     ```json
     {
       "memberId": 1
@@ -1041,7 +1041,7 @@ Returns the details of an event specified by its id.
 - Request
 
   - Method: GET
-  - URL: /api/events/:eventId/details
+  - URL: /api/events/:eventId
   - Body: none
 
 - Successful Response
@@ -1102,8 +1102,7 @@ Returns the details of an event specified by its id.
 Creates and returns a new venue for a group specified by its id
 
 - Require Authentication: true
-- Require Authentication: Current User must be the organizer of the group or a member of
-  the group with a status of "co-host"
+- Require Authentication: Current User must be the organizer of the group or a member of the group with a status of "co-host"
 - Request
 
   - Method: POST
@@ -1181,12 +1180,11 @@ Creates and returns a new venue for a group specified by its id
 Edit a new venue specified by its id
 
 - Require Authentication: true
-- Require Authentication: Current User must be the organizer of the group or a member of
-  the group with a status of "co-host"
+- Require Authentication: Current User must be the organizer of the group or a member of the group with a status of "co-host"
 - Request
 
   - Method: PUT
-  - URL: /api/venues/:venueId/edit
+  - URL: /api/venues/:venueId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1260,8 +1258,7 @@ Edit a new venue specified by its id
 Creates and returns a new event for a group specified by its id
 
 - Require Authentication: true
-- Require Authorization: Current User must be the organizer of the group or a member of
-  the group with a status of "co-host"
+- Require Authorization: Current User must be the organizer of the group or a member of the group with a status of "co-host"
 - Request
 
   - Method: POST
@@ -1496,9 +1493,7 @@ Returns the attendees of an event specified by its id.
   - URL: /api/events/:eventId/attendees
   - Body: none
 
-- Successful Response: If you ARE the organizer of the group or a member of the
-  group with a status of "co-host". Shows all
-  attendees, regardless of their status, and their status.
+- Successful Response: If you ARE the organizer of the group or a member of the group with a status of "co-host". Shows all attendees, regardless of their status, and their status.
 
   - Status Code: 200
   - Headers:
@@ -1591,7 +1586,7 @@ Request attendance for an event specified by id.
 - Request
 
   - Method: POST
-  - URL: /api/events/:eventId/attend
+  - URL: /api/events/:eventId/attendees
   - Headers:
     - Content-Type: application/json
   - Body: none
@@ -1664,7 +1659,7 @@ Change the status of an attendance for an event specified by id.
 - Request
 
   - Method: PUT
-  - URL: /api/events/:eventId/attendees/:attendanceId/status
+  - URL: /api/events/:eventId/attendees/:attendanceId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1744,7 +1739,7 @@ Delete an attendance to an event specified by id.
 - Request
 
   - Method: DELETE
-  - URL: /api/events/:eventId/attendees/:attendanceId/delete
+  - URL: /api/events/:eventId/attendees/:attendanceId
   - Headers:
     - Content-Type: application/json
   - Body:
