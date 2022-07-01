@@ -265,7 +265,7 @@ Returns all the groups.
 - Request
 
   - Method: GET
-  - URL: /:userId/groups
+  - URL: /current-session-user/groups
   - Body: none
 
 - Successful Response
