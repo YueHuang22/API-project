@@ -9,6 +9,8 @@ module.exports = {
         organizerId: 1,
         about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
         type: 'In Person',
+        city: 'New York',
+        state: 'NY',
         private: false,
       },
     ], {});

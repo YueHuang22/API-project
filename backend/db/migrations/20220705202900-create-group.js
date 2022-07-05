@@ -33,9 +33,11 @@ module.exports = {
       },
       city: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       state: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       previewImage: {
         type: Sequelize.STRING,
