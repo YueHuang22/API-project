@@ -12,7 +12,7 @@ router.get(
     async (req, res) => {
         const groups = await Group.findAll({
             attributes: {
-                include: [[Sequelize.fn('COUNT', Sequelize.col('members.id')), 'numMembers']],
+                include: [[Sequelize.fn('COUNT', Sequelize.col('Members.id')), 'numMembers']],
             },
             include: [{
                 model: Member, attributes: [],
