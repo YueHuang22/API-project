@@ -5,9 +5,9 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const routes = require('./routes');
 const { environment, } = require('./config');
 const isProduction = environment === 'production';
+const routes = require('./routes');
 const { ValidationError, } = require('sequelize');
 
 const app = express();
@@ -26,7 +26,6 @@ app.use(
         policy: 'cross-origin',
     })
 );
-
 // Set the _csrf token and create req.csrfToken method
 app.use(
     csurf({

@@ -35,14 +35,27 @@ router.get(
 //     return res.json(group)
 // })
 
-// router.post('/:groupId',
+// router.put('/:groupId',
+//     async (req, res) => {
+//         const groupId = req.params
+//         const { name, email, } = req.body
+//         const group = await Group.findOne({
+//             where: { groupId, },
+//         })
+//         group.name=name
+//         group.email = email
+//         await group.save()
+//         return res.json(group)
+//     })
+
+// router.delete('/:groupId',
 //     async (req, res) => {
 //         const groupId = req.params
 //         const group = await Group.findOne({
 //             where: { groupId, },
 //         })
-//         req.body
-//         return res.json(group)
+//         await group.destroy()
+//         return res.json({ message: 'group deleted', })
 //     })
 
 module.exports = router
