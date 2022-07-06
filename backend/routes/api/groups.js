@@ -17,7 +17,7 @@ router.get(
     '/:groupId',
     async (req, res) => {
         const { groupId, } = req.params
-        const group = await Group.findByPk(groupId, { include: 'Organizer', })
+        const group = await Group.findByPk(groupId, { include: 'organizer', })
         if (group) {
             res.json(group)
         } else {
