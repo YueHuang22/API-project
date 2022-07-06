@@ -29,4 +29,20 @@ router.get(
     }
 )
 
-module.exports = router;
+// router.post('/', async (req, res) => {
+//     const { name, email, } = req.body
+//     const group = await Group.create({ name, email, })
+//     return res.json(group)
+// })
+
+// router.post('/:groupId',
+//     async (req, res) => {
+//         const groupId = req.params
+//         const group = await Group.findOne({
+//             where: { groupId, },
+//         })
+//         req.body
+//         return res.json(group)
+//     })
+
+module.exports = router
