@@ -1,5 +1,4 @@
 'use strict';
-const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -19,7 +18,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete('Groups', {
-      name: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'], },
+      name: { [Op.in]: ['Test Group'], },
     }, {});
   },
 };

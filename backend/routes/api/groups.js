@@ -1,14 +1,25 @@
 const express = require('express')
+const { Op, } = require('sequelize');
 const { setTokenCookie, requireAuth, } = require('../../utils/auth');
-const { Group, User, } = require('../../db/models');
+const { Group, Member, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
 
+
 router.get(
     '/',
     async (req, res) => {
-        const groups = await Group.findAll()
+        const groups = await Group.findAll({
+            attributes: {
+                include: [[Sequelize.fn('COUNT', Sequelize.col('members.id')), 'numMembers']],
+            },
+            include: [{
+                model: Member, attributes: [],
+                where: { 'status': { [Op.ne]: 'pending', }, },
+            }],
+        }
+        )
         res.json({ Groups: groups, })
     }
 )
@@ -17,7 +28,17 @@ router.get(
     '/:groupId',
     async (req, res) => {
         const { groupId, } = req.params
-        const group = await Group.findByPk(groupId, { include: 'organizer', })
+        const group = await Group.findByPk(groupId, {
+            attributes: {
+                include: [[Sequelize.fn('COUNT', Sequelize.col('members.id')), 'numMembers']],
+            },
+            include: [
+                {
+                    model: Member, attributes: [],
+                    where: { 'status': { [Op.ne]: 'pending', }, },
+                },
+                'organizer'],
+        })
         if (group) {
             res.json(group)
         } else {
