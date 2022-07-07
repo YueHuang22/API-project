@@ -42,14 +42,11 @@ router.get(
                     as: 'Venue',
                     attributes: ['id', 'city', 'state'],
                     required: false,
-                }, {
-                    model: Image,
-                    as: 'Images',
-                    attributes: ['url'],
-                    required: false,
                 }],
             }
         )
+        const images = await event.getImages()
+        event.dataValues.images = images.map(image => image.url)
         res.json(event)
     }
 )

@@ -54,14 +54,18 @@ router.get(
     '/:groupId',
     async (req, res) => {
         const { groupId, } = req.params
-        const group = await Group.findByPk(groupId)
+        const group = await Group.findByPk(groupId, {
+            include: 'organizer',
+        })
         if (!group) {
             const err = new Error('Not Found');
             err.message = 'Group couldn\'t be found';
             err.status = 404;
             throw err;
         }
+        const images = await group.getImages()
         group.dataValues.numMembers = await group.countMembers();
+        group.dataValues.images = images.map(image => image.url)
         res.json(group)
     }
 )
