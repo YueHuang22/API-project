@@ -6,12 +6,16 @@ const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
 const { route, } = require('./session');
+const group = require('../../db/models/group');
 
 
 router.get(
     '/',
     async (_req, res) => {
         const groups = await Group.findAll()
+        for (const group of groups) {
+            group.dataValues.numMembers = await group.countMembers();
+        }
         res.json({ Groups: groups, })
     }
 )
@@ -41,11 +45,13 @@ router.get(
             },
         })
         const organizedGroups = await req.user.getOrganizedGroups()
-        res.json({ Groups: [...groups, ...organizedGroups], })
+        const allGroups = [...groups, ...organizedGroups]
+        for (const group of allGroups) {
+            group.dataValues.numMembers = await group.countMembers();
+        }
+        res.json({ Groups: allGroups, })
     }
 )
-
-
 
 router.get(
     '/:groupId',
@@ -58,6 +64,7 @@ router.get(
             err.status = 404;
             throw err;
         }
+        group.dataValues.numMembers = await group.countMembers();
         res.json(group)
     }
 )

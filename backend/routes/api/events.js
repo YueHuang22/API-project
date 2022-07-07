@@ -54,4 +54,30 @@ router.get(
     }
 )
 
+router.delete(
+    '/:eventId',
+    requireAuth,
+    async (req, res) => {
+        const { eventId, } = req.params
+        const { id: userId, } = req.user
+        const event = await Event.findByPk(eventId)
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const group = await event.getGroup()
+        const membership = await group.getMemberships({ where: { userId, }, })
+        if (userId == group.organizerId || membership[0].status == 'co-host') {
+            await event.destroy()
+            res.json({ message: 'Successfully deleted', })
+        } else {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
+    }
+)
 module.exports = router
