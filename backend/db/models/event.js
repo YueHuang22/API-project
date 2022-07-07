@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     venueId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     type: {
       type: DataTypes.STRING,
@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     capacity: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     price: {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
     },
     startDate: {
       type: DataTypes.DATE,
@@ -43,10 +43,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     endDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     previewImage: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
   }, {
     sequelize,

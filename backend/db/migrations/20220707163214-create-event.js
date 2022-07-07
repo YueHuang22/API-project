@@ -24,11 +24,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         references: { model: 'Venues', key: 'id', },
-        allowNull: false,
+        allowNull: true,
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       type: {
         type: Sequelize.STRING,
@@ -36,11 +36,11 @@ module.exports = {
       },
       capacity: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       price: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       startDate: {
         type: Sequelize.DATE,
@@ -48,10 +48,11 @@ module.exports = {
       },
       endDate: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       previewImage: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
