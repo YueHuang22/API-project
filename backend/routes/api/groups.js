@@ -32,7 +32,14 @@ router.get(
     '/my',
     requireAuth,
     async (req, res) => {
-        const groups = await req.user.getGroups()
+        const groups = await Group.findAll({
+            include: {
+                model: Member,
+                where: { userId: req.user.id, },
+                attributes: [],
+                required: true,
+            },
+        })
         const organizedGroups = await req.user.getOrganizedGroups()
         res.json({ Groups: [...groups, ...organizedGroups], })
     }
