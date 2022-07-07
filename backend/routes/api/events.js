@@ -1,7 +1,7 @@
 const express = require('express')
 const { Op, } = require('sequelize');
 const { setTokenCookie, requireAuth, } = require('../../utils/auth');
-const { Event, Group, Venue, Member, User, Sequelize, } = require('../../db/models');
+const { Event, Group, Venue, Image, Member, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
@@ -41,6 +41,11 @@ router.get(
                     model: Venue,
                     as: 'Venue',
                     attributes: ['id', 'city', 'state'],
+                    required: false,
+                }, {
+                    model: Image,
+                    as: 'Images',
+                    attributes: ['url'],
                     required: false,
                 }],
             }

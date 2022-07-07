@@ -2,10 +2,13 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    const groups = await queryInterface.sequelize.query(
+      'SELECT id from Groups ORDER BY id;'
+    );
+    const groupRows = groups[0]
     await queryInterface.bulkInsert('Venues', [
       {
-        id: 1,
-        groupId: 1,
+        groupId: groupRows[0].id,
         address: '123 Disney Lane',
         city: 'New York',
         state: 'NY',
@@ -17,7 +20,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete('Venues', {
-      id: { [Op.in]: [1], },
+      address: { [Op.in]: ['123 Disney Lane'], },
     }, {});
   },
 };

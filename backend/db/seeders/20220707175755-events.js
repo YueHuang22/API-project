@@ -2,10 +2,17 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    const groups = await queryInterface.sequelize.query(
+      'SELECT id from Groups ORDER BY id;'
+    );
+    const groupRows = groups[0]
+    const venues = await queryInterface.sequelize.query(
+      'SELECT id from Venues ORDER BY id;'
+    );
+    const venueRows = venues[0]
     await queryInterface.bulkInsert('Events', [
       {
-        id: 1,
-        groupId: 1,
+        groupId: groupRows[0].id,
         venueId: null,
         name: 'Tennis Group First Meet and Greet',
         type: 'Online',
@@ -13,9 +20,8 @@ module.exports = {
         previewImage: 'image url',
       },
       {
-        id: 2,
-        groupId: 1,
-        venueId: 1,
+        groupId: groupRows[0].id,
+        venueId: venueRows[0].id,
         name: 'Tennis Single',
         type: 'In Person',
         startDate: '2021-11-19 20:00:00',
@@ -26,7 +32,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete('Events', {
-      id: { [Op.in]: [1, 2], },
+      name: { [Op.in]: ['Tennis Group First Meet and Greet', 'Tennis Single'], },
     }, {});
   },
 };

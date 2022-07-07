@@ -2,19 +2,20 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
+    const events = await queryInterface.sequelize.query(
+      'SELECT id from Events ORDER BY id;'
+    );
+    const eventRows = events[0]
     await queryInterface.bulkInsert('Images', [
       {
-        id: 1,
         groupId: null,
-        eventId: 1,
+        eventId: eventRows[0].id,
         url: 'image_url',
       },
     ], {});
   },
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-    await queryInterface.bulkDelete('Images', {
-      id: { [Op.in]: [1, 2], },
-    }, {});
+    await queryInterface.bulkDelete('Images', null, {});
   },
 };
