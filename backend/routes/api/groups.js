@@ -5,21 +5,13 @@ const { Group, Member, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
+const group = require('../../db/models/group');
 
 
 router.get(
     '/',
     async (req, res) => {
-        const groups = await Group.findAll({
-            attributes: {
-                include: [[Sequelize.fn('COUNT', Sequelize.col('Members.id')), 'numMembers']],
-            },
-            include: [{
-                model: Member, attributes: [],
-                where: { 'status': { [Op.ne]: 'pending', }, },
-            }],
-        }
-        )
+        const groups = await Group.findAll()
         res.json({ Groups: groups, })
     }
 )
@@ -28,55 +20,81 @@ router.get(
     '/:groupId',
     async (req, res) => {
         const { groupId, } = req.params
-        const group = await Group.findByPk(groupId, {
-            attributes: {
-                include: [[Sequelize.fn('COUNT', Sequelize.col('members.id')), 'numMembers']],
-            },
-            include: [
-                {
-                    model: Member, attributes: [],
-                    where: { 'status': { [Op.ne]: 'pending', }, },
-                },
-                'organizer'],
-        })
-        if (group) {
-            res.json(group)
-        } else {
-            res.status(404).json({
-                message: "Group couldn't be found",
-                statusCode: 404,
-            })
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
         }
+        res.json(group)
     }
 )
 
-// router.post('/', async (req, res) => {
-//     const { name, email, } = req.body
-//     const group = await Group.create({ name, email, })
-//     return res.json(group)
-// })
+router.post(
+    '/',
+    requireAuth,
+    async (req, res) => {
+        const { name, about, type, private: isPrivate, city, state, } = req.body
+        const organizerId = req.user.id
 
-// router.put('/:groupId',
-//     async (req, res) => {
-//         const groupId = req.params
-//         const { name, email, } = req.body
-//         const group = await Group.findOne({
-//             where: { groupId, },
-//         })
-//         group.name=name
-//         group.email = email
-//         await group.save()
-//         return res.json(group)
-//     })
+        const group = await Group.create({ name, organizerId, about, type, private: isPrivate, city, state, })
+        res.status(201)
+        return res.json(group)
+    })
 
-// router.delete('/:groupId',
-//     async (req, res) => {
-//         const groupId = req.params
-//         const group = await Group.findOne({
-//             where: { groupId, },
-//         })
-//         await group.destroy()
-//         return res.json({ message: 'group deleted', })
-//     })
+router.put(
+    '/:groupId',
+    requireAuth,
+    async (req, res) => {
+        const groupId = req.params
+        const { name, about, type, private: isPrivate, city, state, } = req.body
+
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        if (group.organizerId != req.user.id) {
+            const err = new Error('Forbidden');
+            err.message = 'Forbidden';
+            err.status = 403;
+            throw err;
+        }
+
+        group.name = name || group.name
+        group.about = about || group.about
+        group.type = type || group.type
+        group.private = isPrivate || group.private
+        group.city = city || group.city
+        group.state = state || group.state
+
+        await group.save()
+        return res.json(group)
+    })
+
+router.delete(
+    '/:groupId',
+    requireAuth,
+    async (req, res) => {
+        const { groupId, } = req.params
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        if (group.organizerId != req.user.id) {
+            const err = new Error('Forbidden');
+            err.message = 'Forbidden';
+            err.status = 403;
+            throw err;
+        }
+        await group.destroy()
+        return res.json({ message: 'Successfully deleted', statusCode: 200, })
+    })
 
 module.exports = router

@@ -1,8 +1,9 @@
 const router = require('express').Router();
+const { restoreUser, requireAuth, } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const groupsRouter = require('./groups.js');
-const { restoreUser, } = require('../../utils/auth.js');
+
 
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
@@ -15,7 +16,7 @@ router.use('/users', usersRouter);
 
 router.use('/groups', groupsRouter)
 
-router.post('/test', (req, res) => {
+router.post('/test', requireAuth, (req, res) => {
     res.json({ requestBody: req.body, });
 });
 
@@ -33,15 +34,12 @@ router.post('/test', (req, res) => {
 // });
 
 // GET /api/restore-user
-
-
 // router.get(
 //     '/restore-user',
 //     (req, res) => {
 //         return res.json(req.user);
 //     }
 // );
-
 
 // GET /api/require-auth
 // const { requireAuth } = require('../../utils/auth.js');

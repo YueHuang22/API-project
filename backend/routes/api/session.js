@@ -1,5 +1,4 @@
 const express = require('express');
-
 const { setTokenCookie, restoreUser, } = require('../../utils/auth');
 const { User, } = require('../../db/models');
 const { check, } = require('express-validator');
@@ -64,8 +63,5 @@ router.get(
         } else return res.json({});
     }
 );
-
-
-
 
 module.exports = router;

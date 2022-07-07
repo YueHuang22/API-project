@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig, } = require('../config');
 const { User, } = require('../db/models');
-
 const { secret, expiresIn, } = jwtConfig;
 
 // Sends a JWT Cookie
@@ -55,8 +54,9 @@ const requireAuth = function (req, _res, next) {
     if (req.user) return next();
 
     const err = new Error('Unauthorized');
-    err.title = 'Unauthorized';
-    err.errors = ['Unauthorized'];
+    //err.title = 'Unauthorized';
+    err.message = 'Authentication required';
+    //err.errors = ['Unauthorized'];
     err.status = 401;
     return next(err);
 }

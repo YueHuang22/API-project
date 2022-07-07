@@ -1,15 +1,10 @@
 'use strict';
 const { Model, Validator, } = require('sequelize');
 const bcrypt = require('bcryptjs');
-const { use, } = require('../../routes/api');
+//const { use, } = require('../../routes/api');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     toSafeObject() {
       const { id, email, firstName, lastName, } = this; // context will be the User instance
       return { id, email, firstName, lastName, };
@@ -49,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   User.init({
     email: {
       type: DataTypes.STRING,
@@ -56,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         len: [3, 256],
+        isEmail: true,
       },
     },
     firstName: {
