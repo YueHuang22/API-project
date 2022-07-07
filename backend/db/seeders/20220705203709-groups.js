@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const users = await queryInterface.sequelize.query(
-      'SELECT id from Users ORDER BY id;'
+      'SELECT id from "Users" ORDER BY id;'
     );
     const userRows = users[0]
     await queryInterface.bulkInsert('Groups', [

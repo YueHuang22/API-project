@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const events = await queryInterface.sequelize.query(
-      'SELECT id from Events ORDER BY id;'
+      'SELECT id from "Events" ORDER BY id;'
     );
     const eventRows = events[0]
     await queryInterface.bulkInsert('Images', [
