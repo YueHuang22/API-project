@@ -3,6 +3,10 @@ const { Model, } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Venue extends Model {
     static associate(models) {
+      Venue.belongsTo(
+        models.Group,
+        { foreignKey: 'groupId', as: 'group', }
+      )
     }
   }
   Venue.init({

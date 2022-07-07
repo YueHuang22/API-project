@@ -236,4 +236,32 @@ router.post(
 
 )
 
+router.post(
+    '/:groupId/venues',
+    requireAuth,
+    async (req, res) => {
+        const { groupId, } = req.params
+        const { id: userId, } = req.user
+        const { address, city, state, lat, lng, } = req.body
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const membership = await group.getMemberships({ where: { userId, }, })
+        if (userId == group.organizerId || membership[0].status == 'co-host') {
+            const venue = await Venue.create({ address, city, state, lat, lng, groupId, })
+            res.json(venue)
+        } else {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
+
+    }
+)
+
 module.exports = router
