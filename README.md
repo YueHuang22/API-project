@@ -244,7 +244,7 @@ Returns all the groups.
           "organizerId": 1,
           "name": "Evening Tennis on the Water",
           "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-          "type": "In person",
+          "type": "In Person",
           "private": true,
           "city": "New York",
           "state": "NY",
@@ -283,7 +283,7 @@ Returns all the groups.
           "organizerId": 1,
           "name": "Evening Tennis on the Water",
           "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-          "type": "In person",
+          "type": "In Person",
           "private": true,
           "city": "New York",
           "state": "NY",
@@ -320,7 +320,7 @@ Returns the details of a group specified by its id.
       "organizerId": 1,
       "name": "Evening Tennis on the Water",
       "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-      "type": "In person",
+      "type": "In Person",
       "private": true,
       "city": "New York",
       "state": "NY",
@@ -367,7 +367,7 @@ Creates and returns a new group.
     {
       "name": "Evening Tennis on the Water",
       "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-      "type": "In person",
+      "type": "In Person",
       "private": true,
       "city": "New York",
       "state": "NY"
@@ -387,7 +387,7 @@ Creates and returns a new group.
       "organizerId": 1,
       "name": "Evening Tennis on the Water",
       "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-      "type": "In person",
+      "type": "In Person",
       "private": true,
       "city": "New York",
       "state": "NY",
@@ -410,7 +410,7 @@ Creates and returns a new group.
       "errors": {
         "name": "Name must be 60 characters or less",
         "about": "About must be 50 characters or more",
-        "type": "Type must be Online or In person",
+        "type": "Type must be Online or In Person",
         "private": "Private must be a boolean",
         "city": "City is required",
         "state": "State is required"
@@ -436,7 +436,7 @@ Updates and returns an existing group.
     {
       "name": "Evening Tennis on the Water",
       "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-      "type": "In person",
+      "type": "In Person",
       "private": true,
       "city": "New York",
       "state": "NY"
@@ -456,7 +456,7 @@ Updates and returns an existing group.
       "organizerId": 1,
       "name": "Evening Tennis on the Water",
       "about": "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-      "type": "In person",
+      "type": "In Person",
       "private": true,
       "city": "New York",
       "state": "NY",
@@ -479,7 +479,7 @@ Updates and returns an existing group.
       "errors": {
         "name": "Name must be 60 characters or less",
         "about": "About must be 50 characters or more",
-        "type": "Type must be Online or In person",
+        "type": "Type must be Online or In Person",
         "private": "Private must be a boolean",
         "city": "City is required",
         "state": "State is required"
@@ -1316,7 +1316,7 @@ Creates and returns a new event for a group specified by its id
       "errors": {
         "venueId": "Venue does not exist",
         "name": "Name must be at least 5 characters",
-        "type": "Type must be Online or In person",
+        "type": "Type must be Online or In Person",
         "capacity": "Capacity must be an integer",
         "price": "Price is invalid",
         "description": "Description is required",
@@ -1404,7 +1404,7 @@ Edit and returns an event specified by its id
       "errors": {
         "venueId": "Venue does not exist",
         "name": "Name must be at least 5 characters",
-        "type": "Type must be Online or In person",
+        "type": "Type must be Online or In Person",
         "capacity": "Capacity must be an integer",
         "price": "Price is invalid",
         "description": "Description is required",

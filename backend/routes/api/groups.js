@@ -5,9 +5,6 @@ const { Group, Member, Event, Venue, User, Sequelize, } = require('../../db/mode
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
-const { route, } = require('./session');
-const group = require('../../db/models/group');
-
 
 router.get(
     '/',
@@ -202,6 +199,37 @@ router.get(
         })
         res.json({ Events: events, })
     }
+)
+
+router.post(
+    '/:groupId/events',
+    requireAuth,
+    async (req, res) => {
+        const { groupId, } = req.params
+        const userId = req.user.id
+        const { venueId, name, type, capacity, price, description, startDate, endDate, } = req.body
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const membership = await group.getMemberships({ where: { userId, }, })
+        if (userId == group.organizerId || membership[0].status == 'co-host') {
+            const event = await Event.create({
+                venueId, groupId, name, type, capacity,
+                price, description, startDate, endDate,
+            })
+            res.json(event)
+        } else {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
+    }
+
 )
 
 module.exports = router
