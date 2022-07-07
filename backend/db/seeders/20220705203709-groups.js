@@ -30,8 +30,6 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-    await queryInterface.bulkDelete('Groups', {
-      name: { [Op.in]: ['Test Group 1', 'Test Group 2'], },
-    }, {});
+    await queryInterface.bulkDelete('Groups', null, {});
   },
 };

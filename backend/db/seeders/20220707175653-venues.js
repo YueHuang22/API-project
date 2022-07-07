@@ -19,8 +19,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-    await queryInterface.bulkDelete('Venues', {
-      address: { [Op.in]: ['123 Disney Lane'], },
-    }, {});
+    await queryInterface.bulkDelete('Venues', null, {});
   },
 };

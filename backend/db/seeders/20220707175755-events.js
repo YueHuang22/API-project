@@ -31,8 +31,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-    await queryInterface.bulkDelete('Events', {
-      name: { [Op.in]: ['Tennis Group First Meet and Greet', 'Tennis Single'], },
-    }, {});
+    await queryInterface.bulkDelete('Events', null, {});
   },
 };

@@ -5,21 +5,29 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Member.belongsTo(
         models.Group,
-        { foreignKey: 'groupId', onDelete: 'CASCADE', hooks: true, }
+        { foreignKey: 'groupId', }
       )
       Member.belongsTo(
         models.User,
-        { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true, }
+        { foreignKey: 'userId', }
       )
     }
   }
   Member.init({
     groupId: {
       type: DataTypes.INTEGER,
+      references: {
+        model: 'Group',
+        key: 'id',
+      },
       allowNull: false,
     },
     userId: {
       type: DataTypes.INTEGER,
+      references: {
+        model: 'User',
+        key: 'id',
+      },
       allowNull: false,
     },
     status: {
@@ -32,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Member',
+    defaultScope: {
+      attributes: {
+        exclude: ['hashedPassword', 'createdAt', 'updatedAt'],
+      },
+    },
   });
   return Member;
 };

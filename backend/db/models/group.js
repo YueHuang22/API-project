@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
       )
       Group.belongsToMany(
         models.User,
-        { through: models.Member, as: 'members', }
+        { through: 'Members', as: 'members', }
       )
       Group.hasMany(
         models.Member,
-        { foreignKey: 'groupId', as: 'memberships', }
+        { foreignKey: 'groupId', onDelete: 'CASCADE', hooks: true, as: 'memberships', }
       )
       Group.hasMany(
         models.Image,
-        { foreignKey: 'groupId', as: 'images', }
+        { foreignKey: 'groupId', onDelete: 'CASCADE', hooks: true, as: 'images', }
       )
     }
   }

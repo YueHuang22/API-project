@@ -36,6 +36,7 @@ router.get(
         const groups = await Group.findAll({
             include: {
                 model: Member,
+                as: 'memberships',
                 where: { userId: req.user.id, },
                 attributes: [],
                 required: true,
@@ -147,23 +148,27 @@ router.post(
         const { params: { groupId, }, user: { id: userId, }, } = req
         const group = await Group.findByPk(
             groupId,
-            { include: { model: Member, where: { userId, }, }, required: false, })
+            { include: { model: Member, as: 'memberships', where: { userId, }, required: false, }, })
         if (!group) {
             const err = new Error('Not Found');
             err.message = 'Group couldn\'t be found';
             err.status = 404;
             throw err;
         }
-        if (group.Members) {
-            const membership = group.Members[0]
+        if (group.memberships.length != 0) {
+            const membership = group.memberships[0]
             const err = new Error('Conflict');
             if (membership.status == 'pending') {
                 err.message = 'Membership has already been requested';
             } else {
-                err.message = 'Membership has already been requested';
+                err.message = 'User is already a member of the group';
             }
             err.status = 400;
             throw err;
+        } else {
+            const membership = await Member.create({ groupId, userId, status: 'pending', })
+            const { userId: memberId, status, } = membership
+            res.json({ groupId, memberId, status, })
         }
     }
 )
@@ -171,10 +176,73 @@ router.post(
 router.put(
     '/:groupId/members/:memberId',
     requireAuth,
-    async (res, req) => {
+    async (req, res) => {
+        const { groupId, memberId, } = req.params
+        const userId = req.user.id
+        const { status, } = req.body
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const member = await Member.findOne({ where: { userId: memberId, groupId: groupId, }, })
+        if (!member) {
+            const err = new Error('Not Found');
+            err.message = 'Membership does not exist for this User';
+            err.status = 404;
+            throw err;
+        }
+        const membership = await group.getMemberships({ where: { userId, }, })
+        if (userId == group.organizerId || membership[0].status == 'co-host') {
+            member.status = status
+            await member.save
+            res.json(member)
+        } else {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
 
     }
 
+)
+
+router.delete(
+    '/:groupId/members/:memberId',
+    requireAuth,
+    async (req, res) => {
+        const { groupId, memberId, } = req.params
+        const { id: userId, } = req.user
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const member = await Member.findOne({ where: { userId: memberId, groupId: groupId, }, })
+        if (!member) {
+            const err = new Error('Not Found');
+            err.message = 'Membership does not exist for this User';
+            err.status = 404;
+            throw err;
+        }
+        if (group.organizerId == userId || member.userId == userId) {
+            await member.destroy()
+            res.json({
+                message: 'Successfully deleted membership from group',
+            })
+        } else {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
+
+    }
 )
 
 router.get(
