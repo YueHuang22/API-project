@@ -14,8 +14,6 @@ module.exports = {
       },
       organizerId: {
         type: Sequelize.INTEGER,
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
         references: { model: 'Users', key: 'id', },
         allowNull: false,
       },

@@ -265,7 +265,7 @@ Returns all the groups.
 - Request
 
   - Method: GET
-  - URL: /api/current-session-user/groups
+  - URL: /api/groups/my
   - Body: none
 
 - Successful Response
