@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       )
       Group.belongsToMany(
         models.User,
-        { through: models.Member, as: 'member', }
+        { through: models.Member, as: 'members', }
+      )
+      Group.hasMany(
+        models.Member,
+        { foreignKey: 'groupId', }
       )
     }
   }
@@ -51,7 +55,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    previewImage: DataTypes.STRING,
+    previewImage: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'Group',

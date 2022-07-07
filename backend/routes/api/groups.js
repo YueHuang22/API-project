@@ -5,7 +5,6 @@ const { Group, Member, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
-const group = require('../../db/models/group');
 const { route, } = require('./session');
 
 
@@ -17,6 +16,18 @@ router.get(
     }
 )
 
+router.post(
+    '/',
+    requireAuth,
+    async (req, res) => {
+        const { name, about, type, private: isPrivate, city, state, } = req.body
+        const organizerId = req.user.id
+
+        const group = await Group.create({ name, organizerId, about, type, private: isPrivate, city, state, })
+        res.status(201)
+        return res.json(group)
+    })
+
 router.get(
     '/my',
     requireAuth,
@@ -26,6 +37,7 @@ router.get(
         res.json({ Groups: [...groups, ...organizedGroups], })
     }
 )
+
 
 
 router.get(
@@ -42,18 +54,6 @@ router.get(
         res.json(group)
     }
 )
-
-router.post(
-    '/',
-    requireAuth,
-    async (req, res) => {
-        const { name, about, type, private: isPrivate, city, state, } = req.body
-        const organizerId = req.user.id
-
-        const group = await Group.create({ name, organizerId, about, type, private: isPrivate, city, state, })
-        res.status(201)
-        return res.json(group)
-    })
 
 router.put(
     '/:groupId',
@@ -108,5 +108,49 @@ router.delete(
         await group.destroy()
         return res.json({ message: 'Successfully deleted', statusCode: 200, })
     })
+
+router.get(
+    '/:groupId/members',
+    async (req, res) => {
+        const { groupId, } = req.params
+        const group = await Group.findByPk(groupId, { include: 'members', })
+        const members = group.members.map(
+            ({ id, email, firstName, lastName, Member, }) => (
+                {
+                    id, email, firstName, lastName,
+                    Membership: { status: Member.status, },
+                }
+            ))
+        res.json({ Members: members, })
+    }
+)
+
+router.post(
+    '/:groupId/members',
+    requireAuth,
+    async (req, res) => {
+        const { params: { groupId, }, user: { id: userId, }, } = req
+        const group = await Group.findByPk(
+            groupId,
+            { include: { model: Member, where: { userId, }, }, required: false, })
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        if (group.Members) {
+            const membership = group.Members[0]
+            const err = new Error('Conflict');
+            if (membership.status == 'pending') {
+                err.message = 'Membership has already been requested';
+            } else {
+                err.message = 'Membership has already been requested';
+            }
+            err.status = 400;
+            throw err;
+        }
+    }
+)
 
 module.exports = router

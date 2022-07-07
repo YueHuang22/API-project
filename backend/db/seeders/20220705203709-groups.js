@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('Groups', [
       {
         id: 1,
-        name: 'Test Group',
+        name: 'Test Group 1',
         organizerId: 1,
         about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
         type: 'In Person',
@@ -15,11 +15,11 @@ module.exports = {
       },
       {
         id: 2,
-        name: 'Test Group',
+        name: 'Test Group 2',
         organizerId: 2,
         about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-        type: 'In Person',
-        private: false,
+        type: 'Online',
+        private: true,
         city: 'New York',
         state: 'NY',
       },
