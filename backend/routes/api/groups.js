@@ -1,7 +1,7 @@
 const express = require('express')
 const { Op, } = require('sequelize');
 const { setTokenCookie, requireAuth, } = require('../../utils/auth');
-const { Group, Member, User, Sequelize, } = require('../../db/models');
+const { Group, Member, Event, Venue, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
@@ -150,6 +150,43 @@ router.post(
             err.status = 400;
             throw err;
         }
+    }
+)
+
+router.put(
+    '/:groupId/members/:memberId',
+    requireAuth,
+    async (res, req) => {
+
+    }
+
+)
+
+router.get(
+    '/:groupId/events',
+    async (req, res) => {
+        const { groupId, } = req.params
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const events = await Event.findAll({
+            where: { groupId, },
+            include: [{
+                model: Group,
+                as: 'Group',
+                attributes: ['id', 'name', 'city', 'state'],
+            }, {
+                model: Venue,
+                as: 'Venue',
+                attributes: ['id', 'city', 'state'],
+                required: false,
+            }],
+        })
+        res.json({ Events: events, })
     }
 )
 
