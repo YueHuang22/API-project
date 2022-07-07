@@ -1,7 +1,7 @@
 const express = require('express')
 const { Op, } = require('sequelize');
 const { setTokenCookie, requireAuth, } = require('../../utils/auth');
-const { Group, Member, Event, Venue, User, Sequelize, } = require('../../db/models');
+const { Group, Member, Event, Venue, Image, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
@@ -261,6 +261,32 @@ router.post(
             throw error
         }
 
+    }
+)
+
+router.post(
+    '/:groupId/images',
+    requireAuth,
+    async (req, res) => {
+        const { groupId, } = req.params
+        const { id: userId, } = req.user
+        const { url, } = req.body
+        const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        if (group.organizerId == userId) {
+            const image = await Image.create({ url, groupId, })
+            res.json({ id: image.id, imageableId: groupId, imageableType: 'Group', url, })
+        } else {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
     }
 )
 
