@@ -58,6 +58,12 @@ router.get(
                 }],
             }
         )
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
         event.dataValues.numAttending = await event.countAttendees()
         const images = await event.getImages()
         event.dataValues.images = images.map(image => image.url)
