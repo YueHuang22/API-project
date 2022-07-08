@@ -181,6 +181,12 @@ router.get(
     async (req, res) => {
         const { groupId, } = req.params
         const group = await Group.findByPk(groupId)
+        if (!group) {
+            const err = new Error('Not Found');
+            err.message = 'Group couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
         const memberships = await group.getMemberships({ include: 'user', })
         const members = memberships.map(
             ({ status, user: { id, email, firstName, lastName, }, }) => (
