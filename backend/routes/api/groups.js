@@ -97,7 +97,7 @@ router.get(
             throw err;
         }
         const images = await group.getImages()
-        group.dataValues.numMembers = await group.countMembers();
+        group.dataValues.numMembers = await group.countMemberships();
         group.dataValues.images = images.map(image => image.url)
         res.json(group)
     }
