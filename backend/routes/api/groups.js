@@ -334,6 +334,7 @@ router.get(
 
 const validateCreateEvent = [
     check('venueId')
+        .optional()
         .custom(async value => {
             if (!await Venue.findByPk(value)) throw new Error()
         })
@@ -343,7 +344,7 @@ const validateCreateEvent = [
         .withMessage('Name is required')
         .bail()
         .isLength({ min: 5, })
-        .withMessage('Name must be 60 characters or less'),
+        .withMessage('Name must be 5 characters or more'),
     check('type')
         .exists({ checkFalsy: true, })
         .withMessage('Type is required')
