@@ -368,6 +368,7 @@ const validateCreateEvent = [
             const startDate = new Date(value)
             const now = new Date()
             if (startDate < now) throw new Error()
+            else return true
         })
         .withMessage('Start date must be in the future'),
     check('endDate')
