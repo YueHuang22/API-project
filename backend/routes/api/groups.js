@@ -11,7 +11,7 @@ router.get(
     async (_req, res) => {
         const groups = await Group.findAll()
         for (const group of groups) {
-            group.dataValues.numMembers = await group.countMembers();
+            group.dataValues.numMembers = await group.countMemberships();
         }
         res.json({ Groups: groups, })
     }
