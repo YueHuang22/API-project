@@ -31,6 +31,10 @@ router.get(
                 required: false,
             }],
         })
+        for (const event of events) {
+            event.dataValues.numAttending = await event.countAttendees()
+        }
+
         res.json({ Events: events, })
     }
 )
@@ -54,6 +58,7 @@ router.get(
                 }],
             }
         )
+        event.dataValues.numAttending = await event.countAttendees()
         const images = await event.getImages()
         event.dataValues.images = images.map(image => image.url)
         res.json(event)
