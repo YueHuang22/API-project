@@ -1,7 +1,7 @@
 const express = require('express')
 const { Op, } = require('sequelize');
 const { setTokenCookie, requireAuth, } = require('../../utils/auth');
-const { Event, Group, Venue, Image, Member, User, Sequelize, } = require('../../db/models');
+const { Event, Group, Venue, Attendee, Member, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
@@ -156,5 +156,114 @@ router.get(
     }
 )
 
+router.post(
+    '/:eventId/attendees',
+    requireAuth,
+    async (req, res) => {
+        const { eventId, } = req.params
+        const { id: userId, } = req.user
+        const event = await Event.findByPk(eventId)
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const group = await event.getGroup()
+        const members = await group.getMemberships({ where: { userId, status: { [Op.ne]: 'pending', }, }, })
+        if (members.length == 0) {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
+        const attendees = await event.getAttendees({ where: { userId, }, })
+        if (attendees.length != 0) {
+            const error = new Error('Error')
+            if (attendees[0].status == 'pending') {
+                error.message = 'Attendance has already been requested'
+            } else {
+                error.message = 'User is already an attendee of the event'
+            }
+            error.status = 400
+            throw error
+        } else {
+            const attendee = await Attendee.create({ eventId, userId, status: 'pending', })
+            res.json(attendee)
+        }
+    }
+)
+
+router.put(
+    '/:eventId/attendees/:attendeeId',
+    requireAuth,
+    async (req, res) => {
+        const { eventId, attendeeId, } = req.params
+        const { id: userId, } = req.user
+        const { status, } = req.body
+
+        const event = await Event.findByPk(eventId)
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const group = await event.getGroup()
+        const members = await group.getMemberships({ where: { userId, status: 'co-host', }, })
+        if (group.organizerId != userId && members.length == 0) {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        }
+        const attendee = await Attendee.findOne({ where: { userId: attendeeId, eventId, }, })
+        if (!attendee) {
+            const error = new Error('Not found')
+            error.message = 'Attendance between the user and the event does not exist'
+            error.status = 404
+            throw error
+        }
+        attendee.status = status
+        await attendee.save()
+        res.json(attendee)
+    }
+)
+
+router.delete(
+    '/:eventId/attendees/:attendeeId',
+    requireAuth,
+    async (req, res) => {
+        const { eventId, attendeeId, } = req.params
+        const { id: userId, } = req.user
+
+        const event = await Event.findByPk(eventId)
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const group = await event.getGroup()
+        const members = await group.getMemberships({ where: { userId, status: 'co-host', }, })
+        const attendee = await Attendee.findOne({ where: { userId: attendeeId, eventId, }, })
+        if (!attendee) {
+            const error = new Error('Not found')
+            error.message = 'Attendance does not exist for this User'
+            error.status = 404
+            throw error
+        }
+        if (group.organizerId != userId && members.length == 0 && attendee.userId != userId) {
+            const error = new Error('Forbidden')
+            error.message = 'Only the User or organizer may delete an Attendance'
+            error.status = 403
+            throw error
+        }
+        await attendee.destroy()
+        res.json({
+            message: 'Successfully deleted attendance from event',
+        })
+    }
+)
 
 module.exports = router

@@ -1658,7 +1658,7 @@ Change the status of an attendance for an event specified by id.
 - Request
 
   - Method: PUT
-  - URL: /api/events/:eventId/attendees/:attendanceId
+  - URL: /api/events/:eventId/attendees/:attendeeId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1741,13 +1741,7 @@ Delete an attendance to an event specified by id.
   - URL: /api/events/:eventId/attendees/:attendanceId
   - Headers:
     - Content-Type: application/json
-  - Body:
-
-    ```json
-    {
-      "userId": 1
-    }
-    ```
+  - Body: None
 
 - Successful Response
 
