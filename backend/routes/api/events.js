@@ -115,7 +115,7 @@ router.put(
         }
         const group = await event.getGroup()
         const membership = await group.getMemberships({ where: { userId, }, })
-        if (userId == group.organizerId || membership[0].status == 'co-host') {
+        if (userId == group.organizerId || membership[0]?.status == 'co-host') {
             event.name = name || event.name
             event.venueId = venueId || event.venueId
             event.type = type || event.type
