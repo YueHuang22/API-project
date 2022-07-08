@@ -116,5 +116,45 @@ router.put(
 
 )
 
+router.get(
+    '/:eventId/attendees',
+    async (req, res) => {
+        const { eventId, } = req.params
+        const userId = req.user?.id
+        const event = await Event.findByPk(eventId)
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        if (userId) {
+            const group = await event.getGroup()
+            const members = await group.getMemberships({ where: { userId, }, })
+            if (group.organizerId == userId ||
+                (members.length && members[0].status == 'co-host')) {
+                const attendees = await event.getAttendees({ include: 'user', })
+                res.json({
+                    Attendees: attendees.map(
+                        ({ status, user: { id, firstName, lastName, }, }) =>
+                            ({ id, firstName, lastName, Attendance: { status, }, })),
+                })
+                return
+            }
+        }
+        const attendees = await event.getAttendees({
+            where: { status: { [Op.ne]: 'pending', }, },
+            include: 'user',
+        })
+        res.json({
+            Attendees: attendees.map(
+                ({ status, user: { id, firstName, lastName, }, }) =>
+                    ({ id, firstName, lastName, Attendance: { status, }, })),
+        })
+
+
+    }
+)
+
 
 module.exports = router

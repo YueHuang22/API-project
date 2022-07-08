@@ -1,24 +1,36 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-  },
+  async up(queryInterface, Sequelize) {
+    const events = await queryInterface.sequelize.query(
+      'SELECT id from "Events" ORDER BY id;'
+    );
+    const eventRows = events[0]
+    const users = await queryInterface.sequelize.query(
+      'SELECT id from "Users" ORDER BY id;'
+    );
+    const userRows = users[0]
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+    await queryInterface.bulkInsert('Attendees', [
+      {
+        eventId: eventRows[0].id,
+        userId: userRows[0].id,
+        status: 'member',
+      },
+      {
+        eventId: eventRows[0].id,
+        userId: userRows[1].id,
+        status: 'pending',
+      },
+      {
+        eventId: eventRows[0].id,
+        userId: userRows[2].id,
+        status: 'waitlist',
+      },
+    ], {});
+  },
+  async down(queryInterface, Sequelize) {
+    const Op = Sequelize.Op;
+    await queryInterface.bulkDelete('Attendees', null, {});
+  },
 };

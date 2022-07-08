@@ -48,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
         models.Group,
         { through: 'Members', as: 'groups', }
       )
+      User.hasMany(
+        models.Attendee,
+        { foreignKey: 'userId', as: 'attendances', }
+      )
     }
   }
 
