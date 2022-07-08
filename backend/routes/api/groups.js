@@ -77,7 +77,7 @@ router.get(
         const organizedGroups = await req.user.getOrganizedGroups()
         const allGroups = [...groups, ...organizedGroups]
         for (const group of allGroups) {
-            group.dataValues.numMembers = await group.countMembers();
+            group.dataValues.numMembers = await group.countMemberships();
         }
         res.json({ Groups: allGroups, })
     }
