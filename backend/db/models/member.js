@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Member.belongsTo(
         models.Group,
-        { foreignKey: 'groupId', }
+        { foreignKey: 'groupId', as: 'group', }
       )
       Member.belongsTo(
         models.User,
-        { foreignKey: 'userId', }
+        { foreignKey: 'userId', as: 'user', }
       )
     }
   }

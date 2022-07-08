@@ -180,12 +180,13 @@ router.get(
     '/:groupId/members',
     async (req, res) => {
         const { groupId, } = req.params
-        const group = await Group.findByPk(groupId, { include: 'members', })
-        const members = group.members.map(
-            ({ id, email, firstName, lastName, Member, }) => (
+        const group = await Group.findByPk(groupId)
+        const memberships = await group.getMemberships({ include: 'user', })
+        const members = memberships.map(
+            ({ status, user: { id, email, firstName, lastName, }, }) => (
                 {
                     id, email, firstName, lastName,
-                    Membership: { status: Member.status, },
+                    Membership: { status: status, },
                 }
             ))
         res.json({ Members: members, })
