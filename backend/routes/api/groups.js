@@ -17,9 +17,41 @@ router.get(
     }
 )
 
+const validateCreateGroup = [
+    check('name')
+        .exists({ checkFalsy: true, })
+        .withMessage('Name is required')
+        .bail()
+        .isLength({ max: 60, })
+        .withMessage('Name must be 60 characters or less'),
+    check('about')
+        .exists({ checkFalsy: true, })
+        .withMessage('About is required')
+        .bail()
+        .isLength({ min: 50, })
+        .withMessage('About must be 50 characters or more'),
+    check('type')
+        .exists({ checkFalsy: true, })
+        .withMessage('Type is required')
+        .bail()
+        .isIn(['Online', 'In Person'])
+        .withMessage('Type must be Online or In Person'),
+    check('private')
+        .exists({ checkFalsy: true, })
+
+        .isBoolean()
+        .withMessage('Private must be a boolean'),
+    check('city')
+        .exists({ checkFalsy: true, })
+        .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true, })
+        .withMessage('State is required'),
+    handleValidationErrors
+];
 router.post(
     '/',
-    requireAuth,
+    [requireAuth, validateCreateGroup,],
     async (req, res) => {
         const { name, about, type, private: isPrivate, city, state, } = req.body
         const organizerId = req.user.id
@@ -71,14 +103,33 @@ router.get(
     }
 )
 
+const validateEditGroup = [
+    check('name')
+        .optional()
+        .isLength({ max: 60, })
+        .withMessage('Name must be 60 characters or less'),
+    check('about')
+        .optional()
+        .isLength({ min: 50, })
+        .withMessage('About must be 50 characters or more'),
+    check('type')
+        .optional()
+        .isIn(['Online', 'In Person'])
+        .withMessage('Type must be Online or In Person'),
+    check('private')
+        .optional()
+        .isBoolean()
+        .withMessage('Private must be a boolean'),
+    handleValidationErrors
+];
 router.put(
     '/:groupId',
-    requireAuth,
+    [requireAuth, validateEditGroup],
     async (req, res) => {
-        const groupId = req.params
+        const { groupId, } = req.params
         const { name, about, type, private: isPrivate, city, state, } = req.body
 
-        const group = await Group.findByPk(groupId)
+        const group = await Group.findByPk(parseInt(groupId))
         if (!group) {
             const err = new Error('Not Found');
             err.message = 'Group couldn\'t be found';
@@ -196,6 +247,13 @@ router.put(
         }
         const membership = await group.getMemberships({ where: { userId, }, })
         if (userId == group.organizerId || membership[0].status == 'co-host') {
+            if (status == 'pending') {
+                const error = new Error('Error')
+                error.message = 'Cannot change a membership status to pending'
+                error.status = 400
+                throw error
+            }
+
             member.status = status
             await member.save
             res.json(member)
@@ -273,9 +331,57 @@ router.get(
     }
 )
 
+const validateCreateEvent = [
+    check('venueId')
+        .custom(async value => {
+            if (!await Venue.findByPk(value)) throw new Error()
+        })
+        .withMessage('Venue does not exist'),
+    check('name')
+        .exists({ checkFalsy: true, })
+        .withMessage('Name is required')
+        .bail()
+        .isLength({ min: 5, })
+        .withMessage('Name must be 60 characters or less'),
+    check('type')
+        .exists({ checkFalsy: true, })
+        .withMessage('Type is required')
+        .bail()
+        .isIn(['Online', 'In Person'])
+        .withMessage('Type must be Online or In Person'),
+    check('capacity')
+        .optional()
+        .isInt({ mix: 0, }),
+    check('capacity')
+        .optional()
+        .isDecimal({ mix: 0, }),
+    check('description')
+        .exists({ checkFalsy: true, })
+        .withMessage('Description is required'),
+    check('startDate')
+        .exists({ checkFalsy: true, })
+        .withMessage('Type is required')
+        .bail()
+        .custom(value => {
+            const startDate = new Date(value)
+            const now = new Date()
+            if (startDate < now) throw new Error()
+        })
+        .withMessage('Start date must be in the future'),
+    check('endDate')
+        .optional()
+        .custom((value, { req, }) => {
+            const startDate = new Date(req.body.startDate)
+            const endDate = new Date(value)
+            if (endDate < startDate) throw new Error()
+            else return true
+        })
+        .withMessage('End date is less than start date'),
+    handleValidationErrors
+];
 router.post(
     '/:groupId/events',
-    requireAuth,
+    [requireAuth, validateCreateEvent],
     async (req, res) => {
         const { groupId, } = req.params
         const userId = req.user.id
@@ -304,9 +410,31 @@ router.post(
 
 )
 
+const validateCreateVenue = [
+    check('address')
+        .exists({ checkFalsy: true, })
+        .withMessage('Address is required'),
+    check('city')
+        .exists({ checkFalsy: true, })
+        .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true, })
+        .withMessage('State is required'),
+    check('lat')
+        .exists({ checkFalsy: true, })
+        .withMessage('Latitude is required')
+        .isNumeric()
+        .withMessage('Latitude is not valid'),
+    check('lng')
+        .exists({ checkFalsy: true, })
+        .withMessage('Longtude is required')
+        .isNumeric()
+        .withMessage('Longitude is not valid'),
+    handleValidationErrors
+];
 router.post(
     '/:groupId/venues',
-    requireAuth,
+    [requireAuth, validateCreateVenue],
     async (req, res) => {
         const { groupId, } = req.params
         const { id: userId, } = req.user

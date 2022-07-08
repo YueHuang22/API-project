@@ -7,9 +7,20 @@ const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
 const { route, } = require('./session');
 
+const validateEditVenue = [
+    check('lat')
+        .optional()
+        .isNumeric()
+        .withMessage('Latitude is not valid'),
+    check('lng')
+        .optional()
+        .isNumeric()
+        .withMessage('Longitude is not valid'),
+    handleValidationErrors
+];
 router.put(
     '/:venueId',
-    requireAuth,
+    [requireAuth, validateEditVenue],
     async (req, res) => {
         const { venueId, } = req.params
         const { id: userId, } = req.user
