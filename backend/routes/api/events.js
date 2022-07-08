@@ -1,7 +1,7 @@
 const express = require('express')
 const { Op, } = require('sequelize');
 const { setTokenCookie, requireAuth, } = require('../../utils/auth');
-const { Event, Group, Venue, Attendee, Member, User, Sequelize, } = require('../../db/models');
+const { Image, Event, Group, Venue, Attendee, Member, User, Sequelize, } = require('../../db/models');
 const router = express.Router();
 const { check, } = require('express-validator');
 const { handleValidationErrors, } = require('../../utils/validation');
@@ -263,6 +263,33 @@ router.delete(
         res.json({
             message: 'Successfully deleted attendance from event',
         })
+    }
+)
+
+router.post(
+    '/:eventId/images',
+    requireAuth,
+    async (req, res) => {
+        const { eventId, } = req.params
+        const { id: userId, } = req.user
+        const { url, } = req.body
+        const event = await Event.findByPk(eventId)
+        if (!event) {
+            const err = new Error('Not Found');
+            err.message = 'Event couldn\'t be found';
+            err.status = 404;
+            throw err;
+        }
+        const attendee = event.getAttendees({ where: { userId, status: 'member', }, })
+        if (attendee.length == 0) {
+            const error = new Error('Forbidden')
+            error.message = 'Forbidden'
+            error.status = 403
+            throw error
+        } else {
+            const image = await Image.create({ url, eventId, ownerId: userId, })
+            res.json({ id: image.id, imageableId: eventId, imageableType: 'Event', url, })
+        }
     }
 )
 

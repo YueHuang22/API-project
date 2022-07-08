@@ -347,7 +347,7 @@ router.post(
             throw err;
         }
         if (group.organizerId == userId) {
-            const image = await Image.create({ url, groupId, })
+            const image = await Image.create({ url, groupId, ownerId: userId, })
             res.json({ id: image.id, imageableId: groupId, imageableType: 'Group', url, })
         } else {
             const error = new Error('Forbidden')
