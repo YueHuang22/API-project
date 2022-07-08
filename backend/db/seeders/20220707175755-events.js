@@ -16,7 +16,7 @@ module.exports = {
         venueId: null,
         name: 'Tennis Group First Meet and Greet',
         type: 'Online',
-        startDate: '2021-11-19 20:00:00',
+        startDate: new Date('2021-11-19 20:00:00'),
         previewImage: 'image url',
       },
       {
@@ -24,7 +24,7 @@ module.exports = {
         venueId: venueRows[0].id,
         name: 'Tennis Single',
         type: 'In Person',
-        startDate: '2021-11-19 20:00:00',
+        startDate: new Date('2021-11-12 20:00:00'),
         previewImage: 'image url',
       }
     ], {});

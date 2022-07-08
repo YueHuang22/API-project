@@ -9,8 +9,17 @@ const { route, } = require('./session');
 
 router.get(
     '/',
-    async (_req, res) => {
+    async (req, res) => {
+        const { page = 0, size = 20, name, type, startDate, } = req.query
+        const where = {}
+        if (name) where['name'] = name
+        if (type) where['type'] = type
+        if (startDate) where['startDate'] = new Date(startDate)
+
         const events = await Event.findAll({
+            limit: size,
+            offset: (page) * size,
+            where,
             include: [{
                 model: Group,
                 as: 'Group',
