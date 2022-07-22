@@ -2,78 +2,69 @@
 
 ## You can see all groups on Meetup
 
-Returns all the groups.
+/To be filled
 
 - you don't need authentication on this
-- Request
+- /To be filled
 
-  - Method: GET
-  - URL: /api/groups
-  - Body: none
+  - /To be filled
+  - /To be filled
+  - /To be filled
 
 
-## Get all Groups joined or organized by the Current User
+## You can see all groups joined or organized by you
 
-Returns all the groups.
+To be filled
 
-- Require Authentication: true
-- Request
+- /To be filled
+- /To be filled
 
-  - Method: GET
-  - URL: /api/groups/my
-  - Body: none
+  - To be filled
+  - To be filled
+  - To be filled
 
-- Successful Response
 
-  - Status Code: 200
-  - Headers:
-    - Content-Type: application/json
-  - Body:
+## You can get details  of a group by its id
 
-s
+To be filled
 
-## Get details of a Group from an id
+- To be filled
+- To be filled
 
-Returns the details of a group specified by its id.
+  - To be filled
+  - To be filled
+  - To be filled
 
-- Require Authentication: false
-- Request
+## You can create a group
 
-  - Method: GET
-  - URL: /api/groups/:groupId
-  - Body: none
+To be filled
 
-## Create a Group
+- To be filled
+- To be filled
 
-Creates and returns a new group.
-
-- Require Authentication: true
-- Request
-
-  - Method: POST
-  - URL: /api/groups
+  - To be filled
+  - To be filled
 
 
 
+## If you are the organizer, you can edit a group
 
-## Edit a Group
+To be filled
 
-Updates and returns an existing group.
-
-- Require Authentication: true
-- Require proper authorization: Group must belong to the current user
-- Request
-
+- To be filled
+- To be filled
+- To be filled
 
 
-## Delete a Group
 
-Deletes an existing group.
+## If you are the organizer, you can delete a group
 
-- Require Authentication: true
-- Require proper authorization: Group must belong to the current user
-- Request
+To be filled
 
-  - Method: DELETE
-  - URL: /api/groups/:groupId
-  - Body: none
+- To be filled
+- To be filled
+- To be filled
+
+  - To be filled
+  - To be filled
+  - To be filled
