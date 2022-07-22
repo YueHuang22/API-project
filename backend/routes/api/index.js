@@ -24,9 +24,9 @@ router.use('/images', imagesRouter);
 
 
 
-router.post('/test', requireAuth, (req, res) => {
-    res.json({ requestBody: req.body, });
-});
+// router.post('/test', requireAuth, (req, res) => {
+//     res.json({ requestBody: req.body, });
+// });
 
 // GET /api/set-token-cookie
 // const { setTokenCookie } = require('../../utils/auth.js');
