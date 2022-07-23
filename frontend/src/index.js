@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider as ReduxProvider } from 'react-redux';
-import './index.css';
-import App from './App';
-import configureStore from './store';
-import { restoreCSRF, csrfFetch } from './store/csrf';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { ModalProvider } from "./context/Modal";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import configureStore from "./store";
+import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from './store/session';
 import * as groupActions from "./store/groups";
 import * as eventActions from "./store/events";
+import "./index.css";
 
 const store = configureStore();
 
@@ -18,18 +19,19 @@ if (process.env.NODE_ENV !== 'production') {
   window.csrfFetch = csrfFetch;
   window.store = store;
   window.sessionActions = sessionActions;
-  window.sessionActions = sessionActions;
   window.groupActions = groupActions;
   window.eventActions = eventActions;
 }
 
 function Root() {
   return (
-    <ReduxProvider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ReduxProvider>
+    <Provider store={store}>
+      <ModalProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ModalProvider>
+    </Provider>
   );
 }
 
