@@ -359,10 +359,10 @@ const validateCreateEvent = [
         .withMessage('Type must be Online or In Person'),
     check('capacity')
         .optional()
-        .isInt({ mix: 0, }),
-    check('capacity')
+        .isInt({ min: 0, }),
+    check('price')
         .optional()
-        .isDecimal({ mix: 0, }),
+        .isDecimal({ min: 0, }),
     check('description')
         .exists({ checkFalsy: true, })
         .withMessage('Description is required'),

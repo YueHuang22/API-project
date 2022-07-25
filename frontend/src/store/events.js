@@ -42,26 +42,29 @@ export const getAllEvents = () => async (dispatch) => {
     }
 };
 
-export const creatOneGroup = (groupId, payload) => async (dispatch) => {
-    const { name, about, type, private: isPrivate, city, state } = payload;
+export const creatOneEvent = (groupId, payload) => async (dispatch) => {
+    const { venueId, name, type, capacity,
+        price, description, startDate, endDate, } = payload;
     const response = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
         body: JSON.stringify({
-            name, about, type, private: isPrivate, city, state
+            venueId, name, type, capacity, price, description, startDate, endDate,
         }),
     });
     if (response.ok) {
-        const group = await response.json();
-        dispatch(addEvent(group));
+        const event = await response.json();
+        dispatch(addEvent(event));
     }
 };
 
-export const editOneGroup = (id, payload) => async (dispatch) => {
-    const { name, about, type, private: isPrivate, city, state } = payload;
-    const response = await csrfFetch(`/api/groups/${id}`, {
+export const editOneEvent = (id, payload) => async (dispatch) => {
+    const { venueId, name, type, capacity,
+        price, description, startDate, endDate, } = payload;
+    const response = await csrfFetch(`/api/events/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
-            name, about, type, private: isPrivate, city, state
+            venueId, name, type, capacity,
+            price, description, startDate, endDate,
         }),
     });
     if (response.ok) {
@@ -70,8 +73,8 @@ export const editOneGroup = (id, payload) => async (dispatch) => {
     }
 };
 
-export const deleteOneGroup = (id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/groups/${id}`, {
+export const deleteOneEvent = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/events/${id}`, {
         method: 'DELETE',
     });
     if (response.ok) {
@@ -91,15 +94,15 @@ const eventReducer = (state = initialState, action) => {
             newState = [...state, action.payload]
             return newState;
         case EDIT_EVENT:
-            const group = state.find(group => group.id === +action.payload.id)
+            const event = state.find(event => event.id === +action.payload.id)
             newState = [...state]
-            newState = newState.filter(f => f !== group)
-            newState = [...newState, action.payload.group]
+            newState = newState.filter(f => f !== event)
+            newState = [...newState, action.payload.event]
             return newState;
         case DELETE_EVENT:
-            const grouptodelete = state.find(group => group.id === +action.payload)
+            const eventtodelete = state.find(event => event.id === +action.payload)
             newState = [...state];
-            newState = newState.filter(f => f !== grouptodelete)
+            newState = newState.filter(f => f !== eventtodelete)
             return newState;
         default:
             return state;
