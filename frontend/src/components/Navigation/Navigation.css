@@ -1,0 +1,11 @@
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.meetup-logo{
+    display: block;
+    padding: auto;
+}
