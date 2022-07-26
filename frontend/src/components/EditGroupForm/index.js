@@ -17,7 +17,7 @@ function EditGroupForm() {
         dispatch(groupActions.getOneGroup(groupId));
     }, [dispatch, groupId]);
 
-    const sessionUser = useSelector((state) => state.session.user);
+    // const sessionUser = useSelector((state) => state.session.user);
 
     const [name, setName] = useState(group.name);
     const [about, setAbout] = useState(group.about);

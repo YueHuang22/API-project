@@ -82,6 +82,7 @@ export const creatOneGroup = (payload) => async (dispatch) => {
     if (response.ok) {
         const group = await response.json();
         dispatch(addGroup(group));
+        return group
     }
 };
 

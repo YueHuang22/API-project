@@ -17,7 +17,7 @@ function EditEventForm() {
         dispatch(eventActions.getOneEvent(eventId));
     }, [dispatch, eventId]);
 
-    const sessionUser = useSelector((state) => state.session.user);
+    // const sessionUser = useSelector((state) => state.session.user);
 
     const [name, setName] = useState(event.name);
     const [about, setAbout] = useState(event.about);

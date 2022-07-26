@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import * as eventActions from "../../store/events";
 import './NewEventForm.css';
 
 
 function EventForm() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
+    let history = useHistory()
+    const { groupId } = useParams()
+
+    // const sessionUser = useSelector((state) => state.session.user);
 
     const [venueId, setVenueId] = useState(null);
     const [name, setName] = useState("");
@@ -19,10 +23,10 @@ function EventForm() {
 
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(eventActions.creatOneEvent({
+        const event = await dispatch(eventActions.creatOneEvent(groupId, {
             venueId, name, type, capacity, price, description, startDate, endDate,
         }))
         // .catch(async (res) => {
@@ -36,6 +40,8 @@ function EventForm() {
         //     }
         //     else if (data && data.message) (setErrors([data.message]))
         // });
+
+        return history.push(`/events/${event.id}`)
     };
 
     return (

@@ -8,7 +8,7 @@ function NewGroupForm() {
     const dispatch = useDispatch();
     let history = useHistory();
 
-    const sessionUser = useSelector((state) => state.session.user);
+    // const sessionUser = useSelector((state) => state.session.user);
     // const group = useSelector((state) => state.group);
     // const id = group[0].id
 
@@ -21,10 +21,10 @@ function NewGroupForm() {
 
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
+        const group = await dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -37,7 +37,7 @@ function NewGroupForm() {
                 else if (data && data.message) (setErrors([data.message]))
             });
 
-        return history.push(`/groups/`);
+        return history.push(`/groups/${group.id}`);
     };
 
     return (
