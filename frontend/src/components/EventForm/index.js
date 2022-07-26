@@ -6,33 +6,36 @@ import './EventForm.css';
 
 function EventForm() {
     const dispatch = useDispatch();
-    // const sessionUser = useSelector((state) => state.session.user);
+    const sessionUser = useSelector((state) => state.session.user);
+
+    const [venueId, setVenueId] = useState(null);
     const [name, setName] = useState("");
-    const [about, setAbout] = useState("");
     const [type, setType] = useState("Online");
-    const [isPrivate, setPrivate] = useState(false);
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
+    const [capacity, setCapacity] = useState(0);
+    const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState("");
+    const [startDate, setStartdate] = useState(null);
+    const [endDate, setEnddate] = useState(null);
 
     const [errors, setErrors] = useState([]);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        // return dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
-        //     .catch(async (res) => {
-        //         const data = await res.json();
-        //         if (data && data.errors) {
-        //             if (Array.isArray(data.errors)) {
-        //                 setErrors(data.errors)
-        //             } else {
-        //                 setErrors(Object.values(data.errors))
-        //             }
+        return dispatch(eventActions.creatOneEvent({
+            venueId, name, type, capacity, price, description, startDate, endDate,
+        }))
+        // .catch(async (res) => {
+        //     const data = await res.json();
+        //     if (data && data.errors) {
+        //         if (Array.isArray(data.errors)) {
+        //             setErrors(data.errors)
+        //         } else {
+        //             setErrors(Object.values(data.errors))
         //         }
-        //         else if (data && data.message) (setErrors([data.message]))
-        //     });
-
+        //     }
+        //     else if (data && data.message) (setErrors([data.message]))
+        // });
     };
 
     return (
@@ -40,6 +43,14 @@ function EventForm() {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
+            <label>
+                Venue ID:
+                <input
+                    type="text"
+                    value={venueId}
+                    onChange={(e) => setVenueId(e.target.value)}
+                />
+            </label>
             <label>
                 Name:
                 <input
@@ -50,42 +61,58 @@ function EventForm() {
                 />
             </label>
             <label>
-                About:
+                Type:
+                <select onChange={(e) => setType(e.target.value)}>
+                    <option value="Online" >Online</option>
+                    <option value="In Person">In Person</option>
+                </select>
+            </label>
+            <label>
+                Capacity:
                 <input
                     type="text"
-                    value={about}
-                    onChange={(e) => setAbout(e.target.value)}
-                    required
-                />
-            </label>
-            {/* <label>
-                Confirm Password
-                <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={capacity}
+                    onChange={(e) => setCapacity(e.target.value)}
                     required
                 />
             </label>
             <label>
-                First Name
+                Price:
                 <input
                     type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     required
                 />
             </label>
             <label>
-                Last Name
+                Description:
                 <input
                     type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     required
                 />
             </label>
-            <button type="submit">Sign Up</button> */}
+            <label>
+                Start Date:
+                <input
+                    type="text"
+                    value={startDate}
+                    onChange={(e) => setStartdate(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                End Date:
+                <input
+                    type="text"
+                    value={endDate}
+                    onChange={(e) => setEnddate(e.target.value)}
+                    required
+                />
+            </label>
+            <button type="submit">Submit</button>
         </form>
     );
 }

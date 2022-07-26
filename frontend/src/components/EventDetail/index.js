@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneEvent, deleteOneEvent } from '../../store/events';
 
 const EventDetail = () => {
     const dispatch = useDispatch();
+    let history = useHistory()
+
     const { eventId } = useParams();
     let event = useSelector(state => {
         return state.event && state.event[0]
@@ -17,6 +19,7 @@ const EventDetail = () => {
     const handleClick = (e) => {
         e.preventDefault();
         dispatch(deleteOneEvent(eventId));
+        return history.push('/events');
     };
 
     return (

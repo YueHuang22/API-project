@@ -129,7 +129,6 @@ const groupReducer = (state = initialState, action) => {
             newState = [...newState, action.payload.group]
             return newState;
         case DELETE_GROUP:
-            debugger
             const grouptodelete = state.find(group => group.id === +action.payload)
             newState = [...state];
             newState = newState.filter(f => f !== grouptodelete)

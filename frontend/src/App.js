@@ -38,14 +38,14 @@ function App() {
           <Route exact path="/groups/new">
             <GroupForm />
           </Route>
+          <Route exact path="/groups/:groupId/events/new">
+            <EventForm />
+          </Route>
           <Route exact path="/groups/:groupId">
             <GroupDetail />
           </Route>
           <Route exact path="/events">
             <EventPage />
-          </Route>
-          <Route exact path="/events/new">
-            <EventForm />
           </Route>
           <Route exact path="/events/:eventId">
             <EventDetail />

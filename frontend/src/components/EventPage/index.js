@@ -29,11 +29,6 @@ function EventPage() {
                     );
                 })}
             </ul>
-            <button>
-                <span>
-                    <NavLink exact to="/events/new">Start an Event</NavLink>
-                </span>
-            </button>
         </div>
     )
 }
