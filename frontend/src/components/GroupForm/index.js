@@ -40,7 +40,7 @@ function GroupForm() {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
-                Name
+                Name:
                 <input
                     type="text"
                     value={name}
@@ -49,7 +49,7 @@ function GroupForm() {
                 />
             </label>
             <label>
-                About
+                About:
                 <input
                     type="text"
                     value={about}

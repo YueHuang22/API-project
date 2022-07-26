@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneEvent, deleteOneEvent } from '../../store/events';
 
@@ -26,6 +26,7 @@ const EventDetail = () => {
                 <p>
                     {event.about}
                 </p>
+                <button><NavLink exact to={'/events/new'}>Edit</NavLink></button>
                 <button onClick={handleClick}>Delete</button>
             </div>
         ))

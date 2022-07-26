@@ -22,9 +22,12 @@ function HomePage() {
                 </div>
             </div>
             <div>
-                <NavLink exact to="/api/groups">Join a group</NavLink>
-                <NavLink exact to="/api/events">Find an event</NavLink>
-                <NavLink exact to="/api/groups">Start a group</NavLink>
+                <NavLink exact to="/groups">Join a group</NavLink>
+                <br></br>
+                <NavLink exact to="/events">Find an event</NavLink>
+                <br></br>
+                <NavLink exact to="/groups/new">Start a group</NavLink>
+                <br></br>
                 <NavLink exact to="/signup">Join meetup</NavLink>
             </div>
         </div >

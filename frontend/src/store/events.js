@@ -41,7 +41,6 @@ export const deleteEvent = (id) => {
     };
 };
 
-
 export const getAllEvents = () => async (dispatch) => {
     const response = await fetch('/api/events');
     if (response.ok) {

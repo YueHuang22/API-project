@@ -6,41 +6,38 @@ import './GroupPage.css'
 
 function GroupPage() {
     const dispatch = useDispatch()
-    // const groups = useSelector(state => {
-    //     return state.group.map(groupId => state.group[groupId]);
-    // });
-
     const groups = useSelector(state => state.group);
 
     useEffect(() => {
         dispatch(getAllGroups());
     }, [dispatch]);
 
-    if (!groups) {
-        return null;
-    }
-
     return (
         <div>
             <ul>
                 {groups.map((group) => {
                     return (
-                        // <NavLink key={pokemon.name} to={`/pokemon/${pokemon.id}`}>
-                        <li>
-                            <div>{group.name}</div>
-                            <div>{group.city}</div>
-                            <div>{group.state}</div>
-                            <div>{group.about}</div>
-                            {/* <div>{group.nummembers}</div> */}
-                            {/* <div>{group.private}</div> */}
-                        </li>
-                        // </NavLink>
+                        <NavLink key={group.name} to={`/groups/${group.id}`}>
+                            <li>
+                                <div>{group.name}</div>
+                                <div>{group.city}</div>
+                                <div>{group.state}</div>
+                                <div>{group.about}</div>
+                                <div>{group.type}</div>
+                                {/* <div>{group.nummembers}</div> */}
+                                {/* <div>{group.private}</div> */}
+                            </li>
+                            <br></br>
+                        </NavLink>
                     );
                 })}
             </ul>
-
+            <button>
+                <span>
+                    <NavLink exact to="/groups/new">Start a group</NavLink>
+                </span>
+            </button>
         </div>
-
     )
 }
 

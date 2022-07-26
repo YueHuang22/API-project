@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneGroup, deleteOneGroup } from '../../store/groups';
 
@@ -27,6 +27,7 @@ const GroupDetail = () => {
                 <p>
                     {group.about}
                 </p>
+                <button><NavLink exact to={'/groups/new'}>Edit</NavLink></button>
                 <button onClick={handleClick}>Delete</button>
             </div>
         ))
