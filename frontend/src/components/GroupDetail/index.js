@@ -7,8 +7,8 @@ import { getOneGroup, deleteOneGroup } from '../../store/groups';
 const GroupDetail = () => {
     const dispatch = useDispatch();
     let history = useHistory()
-
     const { groupId } = useParams();
+
     let group = useSelector(state => {
         return state.group && state.group[0]
     })
@@ -31,7 +31,7 @@ const GroupDetail = () => {
                     <p>
                         {group.about}
                     </p>
-                    <button><NavLink exact to={'/groups/new'}>Edit</NavLink></button>
+                    <button><NavLink exact to={`/groups/${groupId}/edit`}>Edit</NavLink></button>
                     <button onClick={handleClick}>Delete</button>
                 </div>
                 <button>

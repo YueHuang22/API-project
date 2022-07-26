@@ -86,12 +86,9 @@ export const creatOneGroup = (payload) => async (dispatch) => {
 };
 
 export const editOneGroup = (id, payload) => async (dispatch) => {
-    const { name, about, type, private: isPrivate, city, state } = payload;
     const response = await csrfFetch(`/api/groups/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({
-            name, about, type, private: isPrivate, city, state
-        }),
+        body: JSON.stringify(payload),
     });
     if (response.ok) {
         const group = await response.json();

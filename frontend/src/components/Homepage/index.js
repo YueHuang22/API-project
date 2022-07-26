@@ -17,7 +17,7 @@ function HomePage() {
                         <span className='span2'>
                             <img className='img1' alt="" aria-hidden="true" src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27520%27%20height=%27232%27/%3e"></img>
                         </span>
-                        <img className='img2' alt=" a Meetup Online Event" srcset="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=640 1x, https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=1080 2x" src="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=1080" decoding="async" data-nimg="intrinsic" ></img>
+                        <img className='img2' alt=" a Meetup Online Event" srcSet="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=640 1x, https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=1080 2x" src="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=1080" decoding="async" data-nimg="intrinsic" ></img>
                     </span>
                 </div>
             </div>

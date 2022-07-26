@@ -6,10 +6,12 @@ import SignupFormPage from "./components/SignupFormPage";
 import HomePage from "./components/Homepage";
 import GroupPage from "./components/GroupPage";
 import GroupDetail from "./components/GroupDetail";
-import GroupForm from "./components/GroupForm";
+import NewGroupForm from "./components/NewGroupForm";
+import EditGroupForm from "./components/EditGroupForm";
 import EventPage from "./components/EventPage";
 import EventDetail from "./components/EventDetail";
-import EventForm from "./components/EventForm";
+import NewEventForm from "./components/NewEventForm";
+import EditEventForm from "./components/EditEventForm";
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -36,19 +38,25 @@ function App() {
             <GroupPage />
           </Route>
           <Route exact path="/groups/new">
-            <GroupForm />
-          </Route>
-          <Route exact path="/groups/:groupId/events/new">
-            <EventForm />
+            <NewGroupForm />
           </Route>
           <Route exact path="/groups/:groupId">
             <GroupDetail />
+          </Route>
+          <Route exact path="/groups/:groupId/edit">
+            <EditGroupForm />
+          </Route>
+          <Route exact path="/groups/:groupId/events/new">
+            <NewEventForm />
           </Route>
           <Route exact path="/events">
             <EventPage />
           </Route>
           <Route exact path="/events/:eventId">
             <EventDetail />
+          </Route>
+          <Route exact path="/events/:eventId/edit">
+            <EditEventForm />
           </Route>
           <Route>
             404 Page Not Found

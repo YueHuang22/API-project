@@ -1,43 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as groupActions from "../../store/groups";
-import './GroupForm.css';
+import './EditGroupForm.css';
 
-function GroupForm() {
+function EditGroupForm() {
     const dispatch = useDispatch();
     let history = useHistory();
+    const { groupId } = useParams()
+
+    let group = useSelector(state => {
+        return state.group && state.group[0]
+    })
+
+    useEffect(() => {
+        dispatch(groupActions.getOneGroup(groupId));
+    }, [dispatch, groupId]);
 
     const sessionUser = useSelector((state) => state.session.user);
-    // const group = useSelector((state) => state.group);
-    // const id = group[0].id
 
-    const [name, setName] = useState("");
-    const [about, setAbout] = useState("");
-    const [type, setType] = useState("Online");
-    const [isPrivate, setPrivate] = useState(false);
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
+    const [name, setName] = useState(group.name);
+    const [about, setAbout] = useState(group.about);
+    const [type, setType] = useState(group.type);
+    const [isPrivate, setPrivate] = useState(group.isPrivate);
+    const [city, setCity] = useState(group.city);
+    const [state, setState] = useState(group.state);
 
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    if (Array.isArray(data.errors)) {
-                        setErrors(data.errors)
-                    } else {
-                        setErrors(Object.values(data.errors))
-                    }
-                }
-                else if (data && data.message) (setErrors([data.message]))
-            });
+        dispatch(groupActions.editOneGroup(groupId, { name, about, type, private: isPrivate, city, state }))
+        // .catch(async (res) => {
+        //     const data = await res.json();
+        //     if (data && data.errors) {
+        //         if (Array.isArray(data.errors)) {
+        //             setErrors(data.errors)
+        //         } else {
+        //             setErrors(Object.values(data.errors))
+        //         }
+        //     }
+        //     else if (data && data.message) (setErrors([data.message]))
+        // });
 
-        return history.push(`/groups/`);
+        return history.push(`/groups/${groupId}`);
     };
 
     return (
@@ -100,4 +107,4 @@ function GroupForm() {
     );
 }
 
-export default GroupForm;
+export default EditGroupForm;
