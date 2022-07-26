@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_GROUPS = 'group/LOAD-GROUPS'
+const LOAD_ONE_GROUP = 'group/LOAD_ONE_GROUP'
 const ADD_GROUP = "group/ADD_GROUP";
 const EDIT_GROUP = "group/EDIT_GROUP";
 const DELETE_GROUP = "group/DELETE_GROUP";
@@ -9,6 +10,13 @@ export const loadGroups = (groups) => {
     return {
         type: LOAD_GROUPS,
         payload: groups,
+    };
+};
+
+export const loadOneGroup = (group) => {
+    return {
+        type: LOAD_ONE_GROUP,
+        payload: group
     };
 };
 
@@ -33,7 +41,6 @@ export const deleteGroup = (id) => {
     };
 };
 
-
 export const getAllGroups = () => async (dispatch) => {
     const response = await fetch('/api/groups');
     if (response.ok) {
@@ -56,19 +63,13 @@ export const getAllGroups = () => async (dispatch) => {
 //     return response;
 // };
 
-// export const getOneGroup = (user) => async (dispatch) => {
-//     const { email, password } = user;
-//     const response = await csrfFetch('/api/groups/:groupId', {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             email,
-//             password,
-//         }),
-//     });
-//     const data = await response.json();
-//     dispatch(setUser(data.user));
-//     return response;
-// };
+export const getOneGroup = (id) => async (dispatch) => {
+    const response = await fetch(`/api/groups/${id}`);
+    if (response.ok) {
+        const group = await response.json();
+        dispatch(loadOneGroup(group));
+    }
+}
 
 export const creatOneGroup = (payload) => async (dispatch) => {
     const { name, about, type, private: isPrivate, city, state } = payload;
@@ -114,6 +115,9 @@ const groupReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_GROUPS:
             newState = [...action.payload]
+            return newState;
+        case LOAD_ONE_GROUP:
+            newState = [action.payload]
             return newState;
         case ADD_GROUP:
             newState = [...state, action.payload]

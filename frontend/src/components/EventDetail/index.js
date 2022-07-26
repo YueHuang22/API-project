@@ -1,19 +1,35 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
-import './SingleArticle.css';
+import { getOneGroup } from "../../store/groups";
 
 const EventDetail = ({ articles }) => {
     const { id } = useParams();
-    const singleArticle = articles.find(article => article.id === id);
+    const dispatch = useDispatch()
+    // const groups = useSelector(state => {
+    //     return state.group.map(groupId => state.group[groupId]);
+    // });
+
+    const group = useSelector(state => state.group);
+
+    useEffect(() => {
+        dispatch(getOneGroup(id));
+    }, [dispatch, id]);
+
+    if (!group) {
+        return null;
+    }
+
     return (
         <div className='singleArticle'>
-            <h1>{singleArticle.title}</h1>
-            <img
+            <h1>{group.name}</h1>
+            {/* <img
                 src={singleArticle.imageUrl}
                 alt={singleArticle.title}
             />
             <p>
                 {singleArticle.body}
-            </p>
+            </p> */}
         </div>
     );
 };
