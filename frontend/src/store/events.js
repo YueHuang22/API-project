@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD_EVENTS = 'event/LOAD-EVENTS'
+const LOAD_ONE_EVENT = 'event/LOAD_ONE_EVENT'
 const ADD_EVENT = "event/ADD_EVENT";
 const EDIT_EVENT = "event/EDIT_EVENT";
 const DELETE_EVENT = "event/DELETE_EVENT";
@@ -9,6 +10,13 @@ export const loadEvents = (events) => {
     return {
         type: LOAD_EVENTS,
         payload: events,
+    };
+};
+
+export const loadOneEvent = (event) => {
+    return {
+        type: LOAD_ONE_EVENT,
+        payload: event
     };
 };
 
@@ -41,6 +49,14 @@ export const getAllEvents = () => async (dispatch) => {
         dispatch(loadEvents(data.Events));
     }
 };
+
+export const getOneEvent = (id) => async (dispatch) => {
+    const response = await fetch(`/api/events/${id}`);
+    if (response.ok) {
+        const event = await response.json();
+        dispatch(loadOneEvent(event));
+    }
+}
 
 export const creatOneEvent = (groupId, payload) => async (dispatch) => {
     const { venueId, name, type, capacity,
@@ -89,6 +105,9 @@ const eventReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_EVENTS:
             newState = [...action.payload]
+            return newState;
+        case LOAD_ONE_EVENT:
+            newState = [action.payload]
             return newState;
         case ADD_EVENT:
             newState = [...state, action.payload]

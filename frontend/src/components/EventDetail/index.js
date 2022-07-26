@@ -1,37 +1,36 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOneGroup } from "../../store/groups";
+import { useSelector, useDispatch } from 'react-redux';
+import { getOneEvent, deleteOneEvent } from '../../store/events';
 
-const EventDetail = ({ articles }) => {
-    const { id } = useParams();
-    const dispatch = useDispatch()
-    // const groups = useSelector(state => {
-    //     return state.group.map(groupId => state.group[groupId]);
-    // });
-
-    const group = useSelector(state => state.group);
+const EventDetail = () => {
+    const dispatch = useDispatch();
+    const { eventId } = useParams();
+    let event = useSelector(state => {
+        return state.event && state.event[0]
+    })
 
     useEffect(() => {
-        dispatch(getOneGroup(id));
-    }, [dispatch, id]);
+        dispatch(getOneEvent(eventId));
+    }, [dispatch, eventId]);
 
-    if (!group) {
-        return null;
-    }
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(deleteOneEvent(eventId));
+    };
 
     return (
-        <div className='singleArticle'>
-            <h1>{group.name}</h1>
-            {/* <img
-                src={singleArticle.imageUrl}
-                alt={singleArticle.title}
-            />
-            <p>
-                {singleArticle.body}
-            </p> */}
-        </div>
+        (event && (
+            <div>
+                <h1>{event.name}</h1>
+                <p>
+                    {event.about}
+                </p>
+                <button onClick={handleClick}>Delete</button>
+            </div>
+        ))
     );
 };
+
 
 export default EventDetail;

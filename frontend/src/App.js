@@ -30,16 +30,16 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/api/groups">
+          <Route exact path="/groups">
             <GroupPage />
           </Route>
-          <Route exact path="/api/groups/:groupId">
+          <Route exact path="/groups/:groupId">
             <GroupDetail />
           </Route>
-          <Route exact path="/api/events">
+          <Route exact path="/events">
             <EventPage />
           </Route>
-          <Route exact path="/api/events/:eventId">
+          <Route exact path="/events/:eventId">
             <EventDetail />
           </Route>
         </Switch>

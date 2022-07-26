@@ -1,21 +1,36 @@
-// import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOneGroup, deleteOneGroup } from '../../store/groups';
 
 
-const GroupDetail = ({ articles }) => {
-    //     const { id } = useParams();
-    //     const singleArticle = articles.find(article => article.id === id);
-    //     return (
-    //         <div className='singleArticle'>
-    //             <h1>{singleArticle.title}</h1>
-    //             <img
-    //                 src={singleArticle.imageUrl}
-    //                 alt={singleArticle.title}
-    //             />
-    //             <p>
-    //                 {singleArticle.body}
-    //             </p>
-    //         </div>
-    //     );
+const GroupDetail = () => {
+    const dispatch = useDispatch();
+    const { groupId } = useParams();
+    let group = useSelector(state => {
+        return state.group && state.group[0]
+    })
+
+    useEffect(() => {
+        dispatch(getOneGroup(groupId));
+    }, [dispatch, groupId]);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(deleteOneGroup(groupId));
+    };
+
+    return (
+        (group && (
+            <div>
+                <h1>{group.name}</h1>
+                <p>
+                    {group.about}
+                </p>
+                <button onClick={handleClick}>Delete</button>
+            </div>
+        ))
+    );
 };
 
 export default GroupDetail;
