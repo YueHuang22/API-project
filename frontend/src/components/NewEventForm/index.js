@@ -26,9 +26,10 @@ function EventForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        const event = await dispatch(eventActions.creatOneEvent(groupId, {
+        await dispatch(eventActions.creatOneEvent(groupId, {
             venueId, name, type, capacity, price, description, startDate, endDate,
         }))
+            .then((event) => history.push(`/events/${event.id}`))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -40,8 +41,6 @@ function EventForm() {
                 }
                 else if (data && data.message) (setErrors([data.message]))
             });
-
-        return history.push(`/events/${event.id}`)
     };
 
     return (

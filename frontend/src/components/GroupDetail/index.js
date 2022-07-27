@@ -11,7 +11,7 @@ const GroupDetail = () => {
     const sessionUser = useSelector((state) => state.session.user);
 
     let group = useSelector(state => {
-        return state.group && state.group[0]
+        return state.group && state.group.length === 1 && state.group[0]
     })
 
     useEffect(() => {
@@ -33,10 +33,12 @@ const GroupDetail = () => {
                     <p>
                         {group.about}
                     </p>
+                    <button><NavLink exact to={`/groups`}>Back to List</NavLink></button>
+                    <br></br>
                     {sessionUser && group.organizerId === sessionUser.id && <button><NavLink exact to={`/groups/${groupId}/edit`}>Edit</NavLink></button>}
                     {sessionUser && group.organizerId === sessionUser.id && <button onClick={handleClick}>Delete</button>}
                 </div>
-                {sessionUser && <button>
+                {sessionUser && group.organizerId === sessionUser.id && <button>
                     <span>
                         <NavLink exact to={`/groups/${group.id}/events/new`}>Start an Event</NavLink>
                     </span>

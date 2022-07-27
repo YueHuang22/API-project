@@ -36,6 +36,7 @@ function EditEventForm() {
         await dispatch(eventActions.editOneEvent(eventId, {
             venueId, name, type, capacity, price, description, startDate, endDate,
         }))
+            .then(() => history.push(`/events/${eventId}`))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -47,8 +48,6 @@ function EditEventForm() {
                 }
                 else if (data && data.message) (setErrors([data.message]))
             });
-
-        return history.push(`/events/${eventId}`);
     };
 
     return (

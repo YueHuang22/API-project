@@ -23,7 +23,8 @@ function NewGroupForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        const group = await dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
+        await dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
+            .then((group) => history.push(`/groups/${group.id}`))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -35,8 +36,6 @@ function NewGroupForm() {
                 }
                 else if (data && data.message) (setErrors([data.message]))
             });
-
-        return history.push(`/groups/${group.id}`);
     };
 
     return (
