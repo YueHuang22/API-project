@@ -29,17 +29,17 @@ function EventForm() {
         const event = await dispatch(eventActions.creatOneEvent(groupId, {
             venueId, name, type, capacity, price, description, startDate, endDate,
         }))
-        // .catch(async (res) => {
-        //     const data = await res.json();
-        //     if (data && data.errors) {
-        //         if (Array.isArray(data.errors)) {
-        //             setErrors(data.errors)
-        //         } else {
-        //             setErrors(Object.values(data.errors))
-        //         }
-        //     }
-        //     else if (data && data.message) (setErrors([data.message]))
-        // });
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    if (Array.isArray(data.errors)) {
+                        setErrors(data.errors)
+                    } else {
+                        setErrors(Object.values(data.errors))
+                    }
+                }
+                else if (data && data.message) (setErrors([data.message]))
+            });
 
         return history.push(`/events/${event.id}`)
     };

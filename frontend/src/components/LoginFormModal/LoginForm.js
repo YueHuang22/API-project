@@ -13,14 +13,17 @@ function LoginForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        await dispatch(sessionActions.login({ email, password })).catch(
-            async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-                else if (data && data.message) (setErrors([data.message]))
+        await dispatch(sessionActions.login({ email, password }))
+            .then(() => {
+                return history.push(`/groups`);
             }
-        );
-        return history.push(`/groups`);
+            ).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                    else if (data && data.message) (setErrors([data.message]))
+                }
+            );
     };
 
     return (
