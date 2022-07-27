@@ -1,9 +1,41 @@
 .Navbar{
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    min-height: 64px;
+    font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
 }
 
 .meetup-logo{
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: inherit;
+    margin-left: 30px;
+}
+
+.login-signup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.login{
+  
+   margin-right: 20px;
+    font-size: .875rem;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 500;
+}
+
+.signup{
+    margin-right: 20px;
+    font-size: .875rem;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 500;
 }

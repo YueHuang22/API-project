@@ -29,7 +29,7 @@ const EventDetail = () => {
                 <p>
                     {event.about}
                 </p>
-                <button><NavLink exact to={'/events/new'}>Edit</NavLink></button>
+                <button><NavLink exact to={`/events/${eventId}/edit`}>Edit</NavLink></button>
                 <button onClick={handleClick}>Delete</button>
             </div>
         ))

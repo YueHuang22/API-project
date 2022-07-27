@@ -1,0 +1,10 @@
+.loginbutton{
+    border: none;
+    background-color: white;
+    font-size: .875rem;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 550;
+    font-family: Graphik Meetup,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+}
