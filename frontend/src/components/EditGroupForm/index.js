@@ -28,10 +28,11 @@ function EditGroupForm() {
 
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(groupActions.editOneGroup(groupId, { name, about, type, private: isPrivate, city, state }))
+        await dispatch(groupActions.editOneGroup(groupId, { name, about, type, private: isPrivate, city, state }))
+            .then(() => history.push(`/groups/${groupId}`))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
@@ -43,8 +44,6 @@ function EditGroupForm() {
                 }
                 else if (data && data.message) (setErrors([data.message]))
             });
-
-        return history.push(`/groups/${groupId}`);
     };
 
     return (

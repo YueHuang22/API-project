@@ -14,6 +14,11 @@ function EventPage() {
 
     return (
         <div>
+            <button>
+                <span>
+                    <NavLink exact to="/groups">Groups</NavLink>
+                </span>
+            </button>
             <ul>
                 {events.map((event) => {
                     return (

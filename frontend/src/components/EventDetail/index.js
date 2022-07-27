@@ -6,6 +6,7 @@ import { getOneEvent, deleteOneEvent } from '../../store/events';
 const EventDetail = () => {
     const dispatch = useDispatch();
     let history = useHistory()
+    const sessionUser = useSelector((state) => state.session.user);
 
     const { eventId } = useParams();
     let event = useSelector(state => {
@@ -29,8 +30,8 @@ const EventDetail = () => {
                 <p>
                     {event.about}
                 </p>
-                <button><NavLink exact to={`/events/${eventId}/edit`}>Edit</NavLink></button>
-                <button onClick={handleClick}>Delete</button>
+                {sessionUser && <button><NavLink exact to={`/events/${eventId}/edit`}>Edit</NavLink></button>}
+                {sessionUser && <button onClick={handleClick}>Delete</button>}
             </div>
         ))
     );

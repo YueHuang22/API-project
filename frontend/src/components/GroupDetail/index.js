@@ -8,6 +8,7 @@ const GroupDetail = () => {
     const dispatch = useDispatch();
     let history = useHistory()
     const { groupId } = useParams();
+    const sessionUser = useSelector((state) => state.session.user);
 
     let group = useSelector(state => {
         return state.group && state.group[0]
@@ -19,8 +20,9 @@ const GroupDetail = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        await dispatch(deleteOneGroup(groupId));
-        return history.push('/groups');
+        await dispatch(deleteOneGroup(groupId)).then(
+            () => history.push('/groups')
+        );
     };
 
     return (
@@ -31,14 +33,14 @@ const GroupDetail = () => {
                     <p>
                         {group.about}
                     </p>
-                    <button><NavLink exact to={`/groups/${groupId}/edit`}>Edit</NavLink></button>
-                    <button onClick={handleClick}>Delete</button>
+                    {sessionUser && group.organizerId === sessionUser.id && <button><NavLink exact to={`/groups/${groupId}/edit`}>Edit</NavLink></button>}
+                    {sessionUser && group.organizerId === sessionUser.id && <button onClick={handleClick}>Delete</button>}
                 </div>
-                <button>
+                {sessionUser && <button>
                     <span>
                         <NavLink exact to={`/groups/${group.id}/events/new`}>Start an Event</NavLink>
                     </span>
-                </button>
+                </button>}
             </>
         ))
     );

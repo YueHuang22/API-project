@@ -70,7 +70,6 @@ export const creatOneEvent = (groupId, payload) => async (dispatch) => {
 };
 
 export const editOneEvent = (id, payload) => async (dispatch) => {
-    debugger
     const { venueId, name, type, capacity,
         price, description, startDate, endDate, } = payload;
     const response = await csrfFetch(`/api/events/${id}`, {

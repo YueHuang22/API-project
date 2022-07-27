@@ -6,6 +6,7 @@ import './GroupPage.css'
 
 function GroupPage() {
     const dispatch = useDispatch()
+    const sessionUser = useSelector((state) => state.session.user);
     const groups = useSelector(state => state.group);
 
     useEffect(() => {
@@ -14,6 +15,16 @@ function GroupPage() {
 
     return (
         <div>
+            <button>
+                <span>
+                    <NavLink exact to="/events">Events</NavLink>
+                </span>
+            </button>
+            {sessionUser && <button>
+                <span>
+                    <NavLink exact to="/groups/new">Start a group</NavLink>
+                </span>
+            </button>}
             <ul>
                 {groups.map((group) => {
                     return (
@@ -32,11 +43,7 @@ function GroupPage() {
                     );
                 })}
             </ul>
-            <button>
-                <span>
-                    <NavLink exact to="/groups/new">Start a group</NavLink>
-                </span>
-            </button>
+
         </div>
     )
 }
