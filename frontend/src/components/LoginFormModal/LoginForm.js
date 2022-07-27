@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function LoginForm() {
     const dispatch = useDispatch();
+    let history = useHistory()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ email, password })).catch(
+        await dispatch(sessionActions.login({ email, password })).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
                 else if (data && data.message) (setErrors([data.message]))
             }
         );
+        return history.push(`/groups`);
     };
 
     return (

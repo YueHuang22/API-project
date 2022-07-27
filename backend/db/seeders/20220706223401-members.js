@@ -11,6 +11,7 @@ module.exports = {
     );
     const userRows = users[0]
     await queryInterface.bulkInsert('Members', [
+      //group 1
       {
         groupId: groupRows[0].id,
         userId: userRows[1].id,
@@ -19,12 +20,152 @@ module.exports = {
       {
         groupId: groupRows[0].id,
         userId: userRows[2].id,
-        status: 'pending',
+        status: 'member',
       },
       {
         groupId: groupRows[0].id,
         userId: userRows[3].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[0].id,
+        userId: userRows[4].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[0].id,
+        userId: userRows[5].id,
+        status: 'member',
+      },
+      //group 2
+      {
+        groupId: groupRows[1].id,
+        userId: userRows[0].id,
         status: 'co-host',
+      },
+      {
+        groupId: groupRows[1].id,
+        userId: userRows[2].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[1].id,
+        userId: userRows[3].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[1].id,
+        userId: userRows[4].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[1].id,
+        userId: userRows[5].id,
+        status: 'pending',
+      },
+      //group 3
+      {
+        groupId: groupRows[2].id,
+        userId: userRows[0].id,
+        status: 'co-host',
+      },
+      {
+        groupId: groupRows[2].id,
+        userId: userRows[1].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[2].id,
+        userId: userRows[3].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[2].id,
+        userId: userRows[4].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[2].id,
+        userId: userRows[5].id,
+        status: 'member',
+      },
+      //group 4
+      {
+        groupId: groupRows[3].id,
+        userId: userRows[0].id,
+        status: 'co-host',
+      },
+      {
+        groupId: groupRows[3].id,
+        userId: userRows[1].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[3].id,
+        userId: userRows[2].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[3].id,
+        userId: userRows[4].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[3].id,
+        userId: userRows[5].id,
+        status: 'member',
+      },
+      //group 5
+      {
+        groupId: groupRows[4].id,
+        userId: userRows[0].id,
+        status: 'co-host',
+      },
+      {
+        groupId: groupRows[4].id,
+        userId: userRows[1].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[4].id,
+        userId: userRows[2].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[4].id,
+        userId: userRows[3].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[4].id,
+        userId: userRows[5].id,
+        status: 'member',
+      },
+      //group 6
+      {
+        groupId: groupRows[5].id,
+        userId: userRows[0].id,
+        status: 'co-host',
+      },
+      {
+        groupId: groupRows[5].id,
+        userId: userRows[1].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[5].id,
+        userId: userRows[2].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[5].id,
+        userId: userRows[3].id,
+        status: 'member',
+      },
+      {
+        groupId: groupRows[5].id,
+        userId: userRows[4].id,
+        status: 'member',
       },
     ], {});
   },

@@ -19,7 +19,7 @@ module.exports = {
       },
       about: {
         type: Sequelize.STRING,
-        field: 'about',
+        allowNull: false,
       },
       type: {
         type: Sequelize.STRING,
