@@ -16,9 +16,9 @@ const EventDetail = () => {
         dispatch(getOneEvent(eventId));
     }, [dispatch, eventId]);
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        dispatch(deleteOneEvent(eventId));
+        await dispatch(deleteOneEvent(eventId));
         return history.push('/events');
     };
 

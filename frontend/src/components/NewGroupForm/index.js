@@ -24,6 +24,7 @@ function NewGroupForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
+        debugger
         const group = await dispatch(groupActions.creatOneGroup({ name, about, type, private: isPrivate, city, state }))
             .catch(async (res) => {
                 const data = await res.json();
@@ -65,14 +66,14 @@ function NewGroupForm() {
             </label>
             <label>
                 Type:
-                <select onChange={(e) => setType(e.target.value)}>
+                <select value={type} onChange={(e) => setType(e.target.value)}>
                     <option value="Online" >Online</option>
                     <option value="In Person">In Person</option>
                 </select>
             </label>
             <label>
                 Private:
-                <select onChange={(e) => setPrivate(e.target.value)}>
+                <select value={isPrivate} onChange={(e) => setPrivate(e.target.value)}>
                     <option value={true}>Private</option>
                     <option value={false}>Public</option>
                 </select>

@@ -31,14 +31,13 @@ const validateCreateGroup = [
         .isLength({ min: 50, })
         .withMessage('About must be 50 characters or more'),
     check('type')
-        .exists({ checkFalsy: true, })
+        .exists()
         .withMessage('Type is required')
         .bail()
         .isIn(['Online', 'In Person'])
         .withMessage('Type must be Online or In Person'),
     check('private')
-        .exists({ checkFalsy: true, })
-
+        .exists()
         .isBoolean()
         .withMessage('Private must be a boolean'),
     check('city')
@@ -342,7 +341,7 @@ const validateCreateEvent = [
     check('venueId')
         .optional()
         .custom(async value => {
-            if (!await Venue.findByPk(value)) throw new Error()
+            if (value && !await Venue.findByPk(value)) throw new Error()
         })
         .withMessage('Venue does not exist'),
     check('name')

@@ -19,19 +19,23 @@ function EditEventForm() {
 
     // const sessionUser = useSelector((state) => state.session.user);
 
+    const [venueId, setVenueId] = useState(event.venueId);
     const [name, setName] = useState(event.name);
-    const [about, setAbout] = useState(event.about);
     const [type, setType] = useState(event.type);
-    const [isPrivate, setPrivate] = useState(event.isPrivate);
-    const [city, setCity] = useState(event.city);
-    const [state, setState] = useState(event.state);
+    const [capacity, setCapacity] = useState(event.capacity);
+    const [price, setPrice] = useState(event.price);
+    const [description, setDescription] = useState(event.description);
+    const [startDate, setStartdate] = useState(event.startDate);
+    const [endDate, setEnddate] = useState(event.endDate);
 
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(eventActions.editOneEvent(eventId, { name, about, type, private: isPrivate, city, state }))
+        await dispatch(eventActions.editOneEvent(eventId, {
+            venueId, name, type, capacity, price, description, startDate, endDate,
+        }))
         // .catch(async (res) => {
         //     const data = await res.json();
         //     if (data && data.errors) {
@@ -53,6 +57,14 @@ function EditEventForm() {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
+                Venue ID:
+                <input
+                    type="text"
+                    value={venueId}
+                    onChange={(e) => setVenueId(e.target.value)}
+                />
+            </label>
+            <label>
                 Name:
                 <input
                     type="text"
@@ -62,43 +74,54 @@ function EditEventForm() {
                 />
             </label>
             <label>
-                About:
-                <input
-                    type="text"
-                    value={about}
-                    onChange={(e) => setAbout(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
                 Type:
-                <select onChange={(e) => setType(e.target.value)}>
+                <select value={type} onChange={(e) => setType(e.target.value)}>
                     <option value="Online" >Online</option>
                     <option value="In Person">In Person</option>
                 </select>
             </label>
             <label>
-                Private:
-                <select onChange={(e) => setPrivate(e.target.value)}>
-                    <option value={true}>Private</option>
-                    <option value={false}>Public</option>
-                </select>
-            </label>
-            <label>
-                City:
+                Capacity:
                 <input
                     type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    value={capacity}
+                    onChange={(e) => setCapacity(e.target.value)}
                     required
                 />
             </label>
             <label>
-                State:
+                Price:
                 <input
                     type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Description:
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Start Date:
+                <input
+                    type="text"
+                    value={startDate}
+                    onChange={(e) => setStartdate(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                End Date:
+                <input
+                    type="text"
+                    value={endDate}
+                    onChange={(e) => setEnddate(e.target.value)}
                     required
                 />
             </label>

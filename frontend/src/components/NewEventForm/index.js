@@ -68,7 +68,7 @@ function EventForm() {
             </label>
             <label>
                 Type:
-                <select onChange={(e) => setType(e.target.value)}>
+                <select value={type} onChange={(e) => setType(e.target.value)}>
                     <option value="Online" >Online</option>
                     <option value="In Person">In Person</option>
                 </select>

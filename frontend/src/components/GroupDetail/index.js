@@ -17,9 +17,9 @@ const GroupDetail = () => {
         dispatch(getOneGroup(groupId));
     }, [dispatch, groupId]);
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        dispatch(deleteOneGroup(groupId));
+        await dispatch(deleteOneGroup(groupId));
         return history.push('/groups');
     };
 
