@@ -16,19 +16,20 @@ function EventPage() {
         <div>
             <button>
                 <span>
-                    <NavLink exact to="/groups">Groups</NavLink>
+                    <NavLink exact to="/groups" style={{ textDecoration: 'none', color: "#008294" }}>Groups</NavLink>
                 </span>
             </button>
+
             <ul>
                 {events.map((event) => {
                     return (
                         <NavLink key={event.name} to={`/events/${event.id}`}>
-                            <li>
-                                <div>{event.name}</div>
-                                <div>{event.type}</div>
-                                <div>{event.capacity}</div>
-                                <div>{event.description}</div>
-                            </li>
+                            <div>{event.startDate}</div>
+                            <div>{event.name}</div>
+                            <div>{event.Group.name}</div>
+                            <div>{event.Group.city}</div>
+                            <div>{event.Group.state}</div>
+                            <div>{event.numAttending}</div>
                             <br></br>
                         </NavLink>
                     );

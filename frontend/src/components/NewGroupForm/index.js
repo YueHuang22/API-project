@@ -8,8 +8,6 @@ function NewGroupForm() {
     const dispatch = useDispatch();
     let history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    // const group = useSelector((state) => state.group);
-    // const id = group[0].id
 
     const [name, setName] = useState("");
     const [about, setAbout] = useState("");
@@ -41,11 +39,12 @@ function NewGroupForm() {
     return (
         <>
             {(!sessionUser) && <h1>Please log in to create a group</h1>}
-            {sessionUser && (<form onSubmit={handleSubmit}>
 
+            {sessionUser && (<form onSubmit={handleSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
+
                 <label>
                     Name:
                     <input
@@ -96,6 +95,7 @@ function NewGroupForm() {
                         required
                     />
                 </label>
+
                 <button type="submit">Submit</button>
             </form>
             )}

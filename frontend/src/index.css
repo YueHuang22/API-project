@@ -11,3 +11,8 @@
     font-size: xx-large;
     font-weight: 500;
 }
+
+.button{
+    border: none;
+    background-color: white;
+}

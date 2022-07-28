@@ -17,33 +17,31 @@ function GroupPage() {
         <div>
             <button>
                 <span>
-                    <NavLink exact to="/events">Events</NavLink>
+                    <NavLink exact to="/events" style={{ textDecoration: 'none', color: "#008294" }}>Events</NavLink>
                 </span>
             </button>
+
             {sessionUser && <button>
                 <span>
-                    <NavLink exact to="/groups/new">Start a group</NavLink>
+                    <NavLink exact to="/groups/new" style={{ textDecoration: 'none', color: "#008294" }}>Start a group</NavLink>
                 </span>
             </button>}
+
             <ul>
                 {groups.map((group) => {
                     return (
                         <NavLink key={group.name} to={`/groups/${group.id}`}>
-                            <li>
-                                <div>{group.name}</div>
-                                <div>{group.city}</div>
-                                <div>{group.state}</div>
-                                <div>{group.about}</div>
-                                <div>{group.type}</div>
-                                {/* <div>{group.nummembers}</div> */}
-                                {/* <div>{group.private}</div> */}
-                            </li>
+                            <div>{group.name}</div>
+                            <div>{group.city}</div>
+                            <div>{group.state}</div>
+                            <div>{group.about}</div>
+                            <div>{group.numMembers}</div>
+                            <div>{group.private === true ? 'Private' : 'Public'}</div>
                             <br></br>
                         </NavLink>
                     );
                 })}
             </ul>
-
         </div>
     )
 }

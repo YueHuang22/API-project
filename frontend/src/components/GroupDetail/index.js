@@ -3,7 +3,6 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneGroup, deleteOneGroup } from '../../store/groups';
 
-
 const GroupDetail = () => {
     const dispatch = useDispatch();
     let history = useHistory()
@@ -32,12 +31,21 @@ const GroupDetail = () => {
                     <h1>{group.name}</h1>
                     <p>
                         {group.about}
+                        <div>{group.city}</div>
+                        <div>{group.state}</div>
+                        <div>{group.numMembers}</div>
+                        <div>{group.private === true ? 'Private' : 'Public'}</div>
+                        <div>{group.about}</div>
                     </p>
+
                     <button><NavLink exact to={`/groups`}>Back to List</NavLink></button>
                     <br></br>
+
                     {sessionUser && group.organizerId === sessionUser.id && <button><NavLink exact to={`/groups/${groupId}/edit`}>Edit</NavLink></button>}
+
                     {sessionUser && group.organizerId === sessionUser.id && <button onClick={handleClick}>Delete</button>}
                 </div>
+
                 {sessionUser && group.organizerId === sessionUser.id && <button>
                     <span>
                         <NavLink exact to={`/groups/${group.id}/events/new`}>Start an Event</NavLink>

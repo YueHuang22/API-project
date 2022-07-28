@@ -17,8 +17,6 @@ function EditGroupForm() {
         dispatch(groupActions.getOneGroup(groupId));
     }, [dispatch, groupId]);
 
-    // const sessionUser = useSelector((state) => state.session.user);
-
     const [name, setName] = useState(group.name);
     const [about, setAbout] = useState(group.about);
     const [type, setType] = useState(group.type);
@@ -51,6 +49,7 @@ function EditGroupForm() {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
+
             <label>
                 Name:
                 <input
@@ -101,6 +100,7 @@ function EditGroupForm() {
                     required
                 />
             </label>
+
             <button type="submit">Submit</button>
         </form>
     );

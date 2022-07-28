@@ -1,6 +1,16 @@
-.all{
-    margin-top: 5%;
+.homepage{
+    margin-top: 6.5%;
 }
+
+/* .center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+} */
 
 .text-img{
     display: flex;
@@ -10,10 +20,9 @@
     margin-right: 5%;
 }
 
-.h1p{
+.text{
     display: flex;
     flex-direction: column;
-    
     width: 45%;
     height: 40%;
 }
@@ -26,14 +35,15 @@
 
 .p{
     line-height: 25px;
+    font-weight:400 ;
 }
 
-.middle-img{
+.img{
     width: 45%;
     height: 40%;
 }
 
-.down{
+.cardsection{
     display: flex;
     font-weight: 200;
     justify-content: space-around;
@@ -42,6 +52,7 @@
     font-size: 20px;
 
 }
+
 .cards{
     display: flex;
     flex-direction: column;
@@ -49,7 +60,7 @@
     width: 25%;
 }
 
-.cardp{
+.cardtext{
     font-weight: 300;
     font-size: 14px;
     text-align: center;

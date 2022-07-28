@@ -15,17 +15,14 @@ function Navigation({ isLoaded }) {
         );
     } else {
         sessionLinks = (
-            <>
-                <div className='login-signup'>
-                    <div className='login'>
-                        <LoginFormModal />
-                    </div>
-                    <div className='signup'>
-                        <NavLink exact to="/signup"
-                            style={{ textDecoration: 'none', color: "black" }}>Sign up</NavLink>
-                    </div>
+            <div className='login-signup'>
+                <div className='login'>
+                    <LoginFormModal />
                 </div>
-            </>
+                <div className='signup'>
+                    <NavLink exact to="/signup" style={{ textDecoration: 'none', color: "black" }}>Sign up</NavLink>
+                </div>
+            </div>
         );
     }
 
@@ -39,9 +36,7 @@ function Navigation({ isLoaded }) {
                     </svg>
                 </NavLink>
             </div>
-
             {isLoaded && sessionLinks}
-
         </div>
     );
 }

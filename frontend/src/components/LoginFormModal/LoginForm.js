@@ -14,10 +14,8 @@ function LoginForm() {
         e.preventDefault();
         setErrors([]);
         await dispatch(sessionActions.login({ email, password }))
-            .then(() => {
-                return history.push(`/groups`);
-            }
-            ).catch(
+            .then(() => history.push(`/groups`))
+            .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors)
