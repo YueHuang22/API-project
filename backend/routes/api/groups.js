@@ -269,9 +269,7 @@ router.put(
             error.status = 403
             throw error
         }
-
     }
-
 )
 
 router.delete(
@@ -305,7 +303,6 @@ router.delete(
             error.status = 403
             throw error
         }
-
     }
 )
 
@@ -415,7 +412,6 @@ router.post(
             throw error
         }
     }
-
 )
 
 const validateCreateVenue = [
@@ -464,7 +460,6 @@ router.post(
             error.status = 403
             throw error
         }
-
     }
 )
 

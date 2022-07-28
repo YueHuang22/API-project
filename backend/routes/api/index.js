@@ -8,7 +8,6 @@ const venuesRouter = require('./venues.js');
 const attendeesRouter = require('./attendees.js');
 const imagesRouter = require('./images.js');
 
-
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
 // If current user session is not valid, set req.user to null
@@ -21,8 +20,6 @@ router.use('/events', eventsRouter);
 router.use('/venues', venuesRouter);
 router.use('/attendees', attendeesRouter);
 router.use('/images', imagesRouter);
-
-
 
 // router.post('/test', requireAuth, (req, res) => {
 //     res.json({ requestBody: req.body, });

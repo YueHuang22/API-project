@@ -31,6 +31,7 @@ router.get(
                 required: false,
             }],
         })
+
         for (const event of events) {
             event.dataValues.numAttending = await event.countAttendees()
         }
@@ -133,7 +134,6 @@ router.put(
             throw error
         }
     }
-
 )
 
 router.get(
@@ -171,8 +171,6 @@ router.get(
                 ({ status, user: { id, firstName, lastName, }, }) =>
                     ({ id, firstName, lastName, Attendance: { status, }, })),
         })
-
-
     }
 )
 
