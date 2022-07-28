@@ -65,19 +65,14 @@ export const creatOneEvent = (groupId, payload) => async (dispatch) => {
     if (response.ok) {
         const event = await response.json();
         dispatch(addEvent(event));
-        return event
+        return event;
     }
 };
 
 export const editOneEvent = (id, payload) => async (dispatch) => {
-    const { venueId, name, type, capacity,
-        price, description, startDate, endDate, } = payload;
     const response = await csrfFetch(`/api/events/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({
-            venueId, name, type, capacity,
-            price, description, startDate, endDate,
-        }),
+        body: JSON.stringify(payload),
     });
     if (response.ok) {
         const group = await response.json();

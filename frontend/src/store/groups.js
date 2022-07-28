@@ -49,20 +49,6 @@ export const getAllGroups = () => async (dispatch) => {
     }
 };
 
-// export const getAllGroupsCurrentUser = () => async (dispatch) => {
-//     const { email, password } = user;
-//     const response = await csrfFetch('/api/groups/my', {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             email,
-//             password,
-//         }),
-//     });
-//     const data = await response.json();
-//     dispatch(setUser(data.user));
-//     return response;
-// };
-
 export const getOneGroup = (id) => async (dispatch) => {
     const response = await fetch(`/api/groups/${id}`);
     if (response.ok) {
@@ -82,7 +68,7 @@ export const creatOneGroup = (payload) => async (dispatch) => {
     if (response.ok) {
         const group = await response.json();
         dispatch(addGroup(group));
-        return group
+        return group;
     }
 };
 

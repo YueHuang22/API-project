@@ -8,10 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+
       groupId: {
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
@@ -26,9 +23,9 @@ module.exports = {
         references: { model: 'Venues', key: 'id', },
         allowNull: true,
       },
-      description: {
+      name: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       type: {
         type: Sequelize.STRING,
@@ -40,6 +37,10 @@ module.exports = {
       },
       price: {
         type: Sequelize.FLOAT,
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
       startDate: {

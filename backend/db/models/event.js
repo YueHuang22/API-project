@@ -34,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     type: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -51,6 +47,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    description: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
     startDate: {

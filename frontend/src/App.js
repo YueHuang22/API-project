@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
-// import { Modal } from "./context/Modal";
-// import LoginFormModal from './components/LoginFormModal'
 import HomePage from "./components/Homepage";
 import GroupPage from "./components/GroupPage";
 import GroupDetail from "./components/GroupDetail";
@@ -15,6 +13,7 @@ import EventDetail from "./components/EventDetail";
 import NewEventForm from "./components/NewEventForm";
 import EditEventForm from "./components/EditEventForm";
 import * as sessionActions from "./store/session";
+import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,11 +32,6 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          {/* <Route exact path="/login">
-            <Modal>
-              <LoginFormModal />
-            </Modal>
-          </Route> */}
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
@@ -66,7 +60,19 @@ function App() {
             <EditEventForm />
           </Route>
           <Route>
-            404 Page Not Found
+            <div className="NotFound">
+              <div>
+                <h1>Uh Oh...</h1>
+              </div>
+              <div>
+                <p>
+                  We can't always find things that we're looking for. Maybe that's just life.
+                </p>
+              </div>
+              <div>
+                <img alt='' src="https://images.adagio.com/images2/custom_blends/150432.jpg"></img>
+              </div>
+            </div>
           </Route>
         </Switch>
       )}
