@@ -15,7 +15,7 @@ module.exports = {
         groupId: null,
         eventId: eventRows[0].id,
         ownerId: userRows[0].id,
-        url: 'image_url',
+        url: 'https://www.paintingwithatwist.com/images/landing/paint-pet-title.jpg',
       },
     ], {});
   },

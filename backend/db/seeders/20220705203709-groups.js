@@ -15,6 +15,7 @@ module.exports = {
         private: false,
         city: 'Long Island City',
         state: 'NY',
+        previewImage: 'https://www.tripswithpets.com/sites/default/files/IMCE/Images-blog/coffee-dogs.jpg',
       },
       {
         name: 'Evening Tennis on the Water',
@@ -24,6 +25,7 @@ module.exports = {
         private: true,
         city: 'New York',
         state: 'NY',
+        previewImage: 'https://pbs.twimg.com/media/D88pqXbXUAA-gnH.jpg',
       },
       {
         name: 'NYC Photographers',
@@ -33,6 +35,7 @@ module.exports = {
         private: false,
         city: 'New York City',
         state: 'NY',
+        previewImage: 'https://lirp.cdn-website.com/8e44ae45/dms3rep/multi/opt/button-classes-meetup-640w.png',
       },
       {
         name: 'Ethnic Dining',
@@ -42,6 +45,7 @@ module.exports = {
         private: false,
         city: 'Flsuhing',
         state: 'NY',
+        previewImage: 'http://sethlui.com/wp-content/uploads/2018/01/Chinese-Dining-Etiquette-800x450.jpg',
       },
       {
         name: 'Shorewalkers',
@@ -51,6 +55,7 @@ module.exports = {
         private: false,
         city: 'New York',
         state: 'NY',
+        previewImage: 'https://d1hirb55zrpywb.cloudfront.net/media/images/38783/blog-gallery-image/1500-ss-brittany-coast-walking-blog-gallery-image.jpg',
       },
       {
         name: 'World Virtual Travelers',
@@ -60,6 +65,7 @@ module.exports = {
         private: true,
         city: 'New York',
         state: 'NY',
+        previewImage: 'https://i.ytimg.com/vi/WFRvCjAj2us/maxresdefault.jpg',
       },
     ], {});
   },

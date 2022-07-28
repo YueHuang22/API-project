@@ -8,7 +8,7 @@ module.exports = {
     const groupRows = groups[0]
     await queryInterface.bulkInsert('Venues', [
       {
-        groupId: groupRows[0].id,
+        groupId: groupRows[1].id,
         address: '123 Disney Lane',
         city: 'New York',
         state: 'NY',

@@ -14,18 +14,43 @@ module.exports = {
     await queryInterface.bulkInsert('Attendees', [
       {
         eventId: eventRows[0].id,
-        userId: userRows[0].id,
+        userId: userRows[1].id,
         status: 'member',
       },
       {
         eventId: eventRows[0].id,
-        userId: userRows[1].id,
-        status: 'pending',
+        userId: userRows[2].id,
+        status: 'member',
       },
       {
         eventId: eventRows[0].id,
+        userId: userRows[3].id,
+        status: 'member',
+      },
+      {
+        eventId: eventRows[0].id,
+        userId: userRows[4].id,
+        status: 'member',
+      },
+      {
+        eventId: eventRows[0].id,
+        userId: userRows[5].id,
+        status: 'member',
+      },
+      {
+        eventId: eventRows[1].id,
+        userId: userRows[1].id,
+        status: 'member',
+      },
+      {
+        eventId: eventRows[1].id,
         userId: userRows[2].id,
-        status: 'waitlist',
+        status: 'member',
+      },
+      {
+        eventId: eventRows[1].id,
+        userId: userRows[3].id,
+        status: 'member',
       },
     ], {});
   },
