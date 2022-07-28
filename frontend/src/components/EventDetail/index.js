@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneEvent, deleteOneEvent } from '../../store/events';
-import { getOneGroup } from '../../store/groups';
 
 const EventDetail = () => {
     const dispatch = useDispatch();
