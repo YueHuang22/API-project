@@ -7,7 +7,8 @@ import './EditEventForm.css';
 function EditEventForm() {
     const dispatch = useDispatch();
     let history = useHistory();
-    const { eventId } = useParams()
+    const { eventId } = useParams();
+    const sessionUser = useSelector((state) => state.session.user);
 
     let event = useSelector(state => {
         return state.event && state.event[0]
@@ -16,8 +17,6 @@ function EditEventForm() {
     useEffect(() => {
         dispatch(eventActions.getOneEvent(eventId));
     }, [dispatch, eventId]);
-
-    // const sessionUser = useSelector((state) => state.session.user);
 
     const [venueId, setVenueId] = useState(event.venueId);
     const [name, setName] = useState(event.name);
@@ -51,81 +50,87 @@ function EditEventForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Venue ID:
-                <input
-                    type="text"
-                    value={venueId}
-                    onChange={(e) => setVenueId(e.target.value)}
-                />
-            </label>
-            <label>
-                Name:
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Type:
-                <select value={type} onChange={(e) => setType(e.target.value)}>
-                    <option value="Online" >Online</option>
-                    <option value="In Person">In Person</option>
-                </select>
-            </label>
-            <label>
-                Capacity:
-                <input
-                    type="text"
-                    value={capacity}
-                    onChange={(e) => setCapacity(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Price:
-                <input
-                    type="text"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Description:
-                <input
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Start Date:
-                <input
-                    type="text"
-                    value={startDate}
-                    onChange={(e) => setStartdate(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                End Date:
-                <input
-                    type="text"
-                    value={endDate}
-                    onChange={(e) => setEnddate(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+        <>
+            {(!sessionUser) && <h1>Please log in to edit an event</h1>}
+
+            {sessionUser && <form onSubmit={handleSubmit}>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+
+                <label>
+                    Venue ID:
+                    <input
+                        type="text"
+                        value={venueId}
+                        onChange={(e) => setVenueId(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Name:
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Type:
+                    <select value={type} onChange={(e) => setType(e.target.value)}>
+                        <option value="Online" >Online</option>
+                        <option value="In Person">In Person</option>
+                    </select>
+                </label>
+                <label>
+                    Capacity:
+                    <input
+                        type="text"
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Price:
+                    <input
+                        type="text"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Description:
+                    <input
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Start Date:
+                    <input
+                        type="text"
+                        value={startDate}
+                        onChange={(e) => setStartdate(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    End Date:
+                    <input
+                        type="text"
+                        value={endDate}
+                        onChange={(e) => setEnddate(e.target.value)}
+                        required
+                    />
+                </label>
+
+                <button type="submit">Submit</button>
+            </form>}
+        </>
     );
 }
 

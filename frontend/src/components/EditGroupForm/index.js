@@ -7,7 +7,8 @@ import './EditGroupForm.css';
 function EditGroupForm() {
     const dispatch = useDispatch();
     let history = useHistory();
-    const { groupId } = useParams()
+    const { groupId } = useParams();
+    const sessionUser = useSelector((state) => state.session.user);
 
     let group = useSelector(state => {
         return state.group && state.group[0]
@@ -45,64 +46,68 @@ function EditGroupForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
+        <>
+            {(!sessionUser) && <h1>Please log in to edit a group</h1>}
 
-            <label>
-                Name:
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                About:
-                <input
-                    type="text"
-                    value={about}
-                    onChange={(e) => setAbout(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Type:
-                <select value={type} onChange={(e) => setType(e.target.value)}>
-                    <option value="Online" >Online</option>
-                    <option value="In Person">In Person</option>
-                </select>
-            </label>
-            <label>
-                Private:
-                <select value={isPrivate} onChange={(e) => setPrivate(e.target.value)}>
-                    <option value={true}>Private</option>
-                    <option value={false}>Public</option>
-                </select>
-            </label>
-            <label>
-                City:
-                <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                State:
-                <input
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-            </label>
+            {sessionUser && <form onSubmit={handleSubmit}>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
 
-            <button type="submit">Submit</button>
-        </form>
+                <label>
+                    Name:
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    About:
+                    <input
+                        type="text"
+                        value={about}
+                        onChange={(e) => setAbout(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Type:
+                    <select value={type} onChange={(e) => setType(e.target.value)}>
+                        <option value="Online" >Online</option>
+                        <option value="In Person">In Person</option>
+                    </select>
+                </label>
+                <label>
+                    Private:
+                    <select value={isPrivate} onChange={(e) => setPrivate(e.target.value)}>
+                        <option value={true}>Private</option>
+                        <option value={false}>Public</option>
+                    </select>
+                </label>
+                <label>
+                    City:
+                    <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    State:
+                    <input
+                        type="text"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        required
+                    />
+                </label>
+
+                <button type="submit">Submit</button>
+            </form>}
+        </>
     );
 }
 
