@@ -14,7 +14,7 @@ function HomePage() {
                             <p className="p">Whatever you’re looking to do this year, Meetup can help. For 20 years, people have turned to Meetup to meet people, make friends, find support, grow a business, and explore their interests. Thousands of events are happening every day—join the fun.</p>
                         </div>
 
-                        <div className="img">
+                        <div className="homepage-img">
                             <img alt=" a Meetup Online Event" srcSet="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=640 1x, https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=1080 2x" src="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=1080" decoding="async" data-nimg="intrinsic" ></img>
                         </div>
                     </div>
