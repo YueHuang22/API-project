@@ -30,19 +30,50 @@ function GroupPage() {
             <ul>
                 {groups.map((group) => {
                     return (
-                        <NavLink key={group.name} to={`/groups/${group.id}`}>
-                            <div>{group.name}</div>
-                            <div>{group.city}</div>
-                            <div>{group.state}</div>
-                            <div>{group.about}</div>
-                            <div>{group.numMembers}</div>
-                            <div>{group.private === true ? 'Private' : 'Public'}</div>
-                            <br></br>
-                        </NavLink>
+                        <>
+                            <div className="card">
+                                <div className="cardimg">
+                                    <img className="img" alt="" src={group.previewImage}></img>
+                                </div>
+
+                                <div className="cardtext">
+                                    <div>
+                                        <NavLink key={group.name} to={`/groups/${group.id}`}>{group.name}
+                                        </NavLink>
+                                    </div>
+                                    <br></br>
+                                    <div>
+                                        <span>
+                                            {group.city}
+                                        </span>
+                                        <span>, </span>
+                                        <span>
+                                            {group.state}
+                                        </span>
+                                    </div>
+                                    <br></br>
+                                    <div>{group.about}</div>
+                                    <br></br>
+                                    <div>{group.name}</div>
+                                    <br></br>
+                                    <div>
+                                        <span>
+                                            {group.numMembers}
+                                        </span>
+                                        <span> members · </span>
+                                        <span>
+                                            {group.private === true ? 'Private' : 'Public'}
+                                        </span>
+                                    </div>
+                                    <br></br>
+                                </div>
+                            </div>
+                            <hr></hr>
+                        </>
                     );
                 })}
-            </ul>
-        </div>
+            </ul >
+        </div >
     )
 }
 
