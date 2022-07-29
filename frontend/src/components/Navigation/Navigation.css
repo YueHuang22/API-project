@@ -21,9 +21,27 @@
     align-items: center;
 }
 
+.demouser{
+    margin-right: 20px;
+    font-size: .875rem;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 500;
+}
+
+.demouserbutton{
+    border: none;
+    background-color: white;
+    font-size: .875rem;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 500;
+}
+
 .login{
-  
-   margin-right: 20px;
+    margin-right: 20px;
     font-size: .875rem;
     font-style: normal;
     line-height: 20px;
