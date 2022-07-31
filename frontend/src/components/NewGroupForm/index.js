@@ -37,69 +37,90 @@ function NewGroupForm() {
     };
 
     return (
-        <>
+        <div className="signup-form-page">
             {(!sessionUser) && <h1>Please log in to create a group</h1>}
 
-            {sessionUser && (<form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+            {sessionUser && <form className="signup-form" onSubmit={handleSubmit}>
+                <div className="signup-form-title">Creating a new group</div>
+                <div className="signup-errors">
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                </div>
 
-                <label>
-                    Name:
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    About:
-                    <input
-                        type="text"
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Type:
-                    <select value={type} onChange={(e) => setType(e.target.value)}>
-                        <option value="Online" >Online</option>
-                        <option value="In Person">In Person</option>
-                    </select>
-                </label>
-                <label>
-                    Private:
-                    <select value={isPrivate} onChange={(e) => setPrivate(e.target.value)}>
-                        <option value={true}>Private</option>
-                        <option value={false}>Public</option>
-                    </select>
-                </label>
-                <label>
-                    City:
-                    <input
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    State:
-                    <input
-                        type="text"
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                        required
-                    />
-                </label>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Name:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        About:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={about}
+                            onChange={(e) => setAbout(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Type:
+                        <select className="form-input" value={type} onChange={(e) => setType(e.target.value)}>
+                            <option value="Online" >Online</option>
+                            <option value="In Person">In Person</option>
+                        </select>
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Private:
+                        <select className="form-input" value={isPrivate} onChange={(e) => setPrivate(e.target.value)}>
+                            <option value={true}>Private</option>
+                            <option value={false}>Public</option>
+                        </select>
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        City:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        State:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
 
-                <button type="submit">Submit</button>
+                <div>
+                    <button className="signup-submitbutton" type="submit">Submit</button>
+                </div>
             </form>
-            )}
-        </>
+            }
+        </div>
     );
 }
 

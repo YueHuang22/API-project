@@ -8,6 +8,7 @@ function SignupFormPage() {
     const dispatch = useDispatch();
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");

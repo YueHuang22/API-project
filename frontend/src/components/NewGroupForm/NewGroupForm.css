@@ -1,0 +1,76 @@
+.signup-form-page {
+    font-family: Graphik Meetup, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.signup-form {
+    width: 500px;
+    height: 80%;
+    max-height: 750px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.signup-form-title {
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.signup-errors {
+    font-size: .975rem;
+    font-style: normal;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 500;
+    color: #008294;
+}
+
+.signup-form-page-input-div {
+    width: 100%;
+    height: 100%;
+}
+
+.form-label {
+    width: 100%;
+    height: 130%;
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+}
+
+.form-input {
+    border-color: rgb(230 230 230);
+    width: 100%;
+    height: 38px;
+    border-width: 1px;
+    border-radius: 6px;
+    border-style: solid;
+    margin-top: 10px;
+}
+
+.form-input:hover {
+    border-color: rgb(39, 38, 38);
+}
+
+.form-input:active {
+    border-width: 1px;
+    border-color: rgba(3, 0, 47, 0.283);
+}
+
+.signup-submitbutton {
+    width: 100%;
+    height: 130%;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #F65858;
+}

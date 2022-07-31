@@ -30,7 +30,7 @@ function EventPage() {
                                     <img alt="" src={event.previewImage}></img>
                                 </div>
                                 <div className="card-content">
-                                    <div className="time">{`${date.toLocaleDateString("en-us", { weekday: "long", month: "short", day: "numeric" })} · ${(date.getHours() > 12 ? date.getHours() - 12 : date.getHours())}:${date.getMinutes()} ${date.getHours() > 12 ? "pm" : "am"}`}</div>
+                                    <div className="time">{`${date.toLocaleDateString("en-us", { weekday: "long", month: "short", day: "numeric" })} · ${(date.getHours() > 12 ? date.getHours() - 12 : date.getHours())}:${date.getMinutes().toString().padStart(2, "0")} ${date.getHours() > 12 ? "pm" : "am"}`}</div>
                                     <div className="title">{event.name}</div>
                                     <div className="card-text">{event.Group.name} · {event.Group.city}, {event.Group.state}</div>
                                     <div className="card-text">{event.numAttending} attendees</div>

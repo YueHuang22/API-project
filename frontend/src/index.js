@@ -9,6 +9,7 @@ import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from './store/session';
 import * as groupActions from "./store/groups";
 import * as eventActions from "./store/events";
+import * as memberActions from "./store/members";
 import "./index.css";
 
 const store = configureStore();
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
   window.groupActions = groupActions;
   window.eventActions = eventActions;
+  window.memberActions = memberActions;
 }
 
 function Root() {

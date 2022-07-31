@@ -57,6 +57,14 @@ export const getOneEvent = (id) => async (dispatch) => {
     }
 }
 
+export const getEventsForGroup = (id) => async (dispatch) => {
+    const response = await fetch(`/api/groups/${id}/events`)
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(loadEvents(data.Events));
+    }
+}
+
 export const creatOneEvent = (groupId, payload) => async (dispatch) => {
     const response = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
