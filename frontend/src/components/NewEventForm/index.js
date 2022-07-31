@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import * as eventActions from "../../store/events";
 import './NewEventForm.css';
 
-
 function NewEventForm() {
     const dispatch = useDispatch();
     let history = useHistory()
@@ -43,88 +42,117 @@ function NewEventForm() {
     };
 
     return (
-        <>
+        <div className="signup-form-page">
             {(!sessionUser) && <h1>Please log in to create an event.</h1>}
 
-            {sessionUser && <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+            {sessionUser && <form className="event-form" onSubmit={handleSubmit}>
+                <div className="signup-form-title">Creating a new event</div>
+                <div className="signup-errors">
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                </div>
 
-                <label>
-                    Venue ID:
-                    <input
-                        type="text"
-                        value={venueId}
-                        onChange={(e) => setVenueId(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Name:
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Type:
-                    <select value={type} onChange={(e) => setType(e.target.value)}>
-                        <option value="Online" >Online</option>
-                        <option value="In Person">In Person</option>
-                    </select>
-                </label>
-                <label>
-                    Capacity:
-                    <input
-                        type="text"
-                        value={capacity}
-                        onChange={(e) => setCapacity(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Price:
-                    <input
-                        type="text"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Description:
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Start Date:
-                    <input
-                        type="text"
-                        value={startDate}
-                        onChange={(e) => setStartdate(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    End Date:
-                    <input
-                        type="text"
-                        value={endDate}
-                        onChange={(e) => setEnddate(e.target.value)}
-                        required
-                    />
-                </label>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Venue ID:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={venueId}
+                            onChange={(e) => setVenueId(e.target.value)}
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Name:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Type:
+                        <select className="form-input" value={type} onChange={(e) => setType(e.target.value)}>
+                            <option value="Online" >Online</option>
+                            <option value="In Person">In Person</option>
+                        </select>
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Capacity:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={capacity}
+                            onChange={(e) => setCapacity(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Price:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Description:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        Start Date:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={startDate}
+                            onChange={(e) => setStartdate(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
 
-                <button type="submit">Submit</button>
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
+                        End Date:
+                        <input
+                            className="form-input"
+                            type="text"
+                            value={endDate}
+                            onChange={(e) => setEnddate(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+
+                <div>
+                    <button className="signup-submitbutton" type="submit">Submit</button>
+                </div>
             </form>
             }
-        </>
+        </div>
     );
 }
 
