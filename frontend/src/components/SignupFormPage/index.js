@@ -41,19 +41,22 @@ function SignupFormPage() {
     };
 
     return (
-        <div className="form-page">
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="boxdiv">
+        <div className="signup-form-page">
+
+            <form className="signup-form" onSubmit={handleSubmit}>
+                <div className="signup-form-title">Signing up</div>
+                <div className="signup-errors">
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
                 </div>
-                <div>
-                    <label className="text">
+
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
                         Email
                         <br></br>
                         <input
-                            className="input"
+                            className="form-input"
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -61,12 +64,12 @@ function SignupFormPage() {
                         />
                     </label>
                 </div>
-                <div>
-                    <label className="text">
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
                         Password
                         <br></br>
                         <input
-                            className="input"
+                            className="form-input"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -74,12 +77,12 @@ function SignupFormPage() {
                         />
                     </label>
                 </div>
-                <div>
-                    <label className="text">
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
                         Confirm Password
                         <br></br>
                         <input
-                            className="input"
+                            className="form-input"
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -87,12 +90,12 @@ function SignupFormPage() {
                         />
                     </label>
                 </div>
-                <div>
-                    <label className="text">
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
                         First Name
                         <br></br>
                         <input
-                            className="input"
+                            className="form-input"
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
@@ -100,12 +103,12 @@ function SignupFormPage() {
                         />
                     </label>
                 </div>
-                <div>
-                    <label className="text">
+                <div className="signup-form-page-input-div">
+                    <label className="form-label">
                         Last Name
                         <br></br>
                         <input
-                            className="input"
+                            className="form-input"
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
@@ -113,8 +116,9 @@ function SignupFormPage() {
                         />
                     </label>
                 </div>
+
                 <div>
-                    <button className="submitbutton" type="submit">Sign Up</button>
+                    <button className="signup-submitbutton" type="submit">Sign Up</button>
                 </div>
             </form >
         </div>
