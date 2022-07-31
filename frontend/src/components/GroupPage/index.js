@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { getAllGroups } from "../../store/groups";
 import './GroupPage.css'
 
@@ -8,71 +8,48 @@ function GroupPage() {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user);
     const groups = useSelector(state => state.group);
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getAllGroups());
     }, [dispatch]);
 
     return (
-        <div>
-            <button>
-                <span>
-                    <NavLink exact to="/events" style={{ textDecoration: 'none', color: "#008294" }}>Events</NavLink>
-                </span>
-            </button>
-
-            {sessionUser && <button>
-                <span>
-                    <NavLink exact to="/groups/new" style={{ textDecoration: 'none', color: "#008294" }}>Start a group</NavLink>
-                </span>
-            </button>}
-
-            <ul>
+        <div className="group-page">
+            <div style={{ height: 80 }}>
+                <NavLink className="group-link" exact to="/events" >Events</NavLink>
+                <NavLink className="group-link" exact to="/groups" >Groups</NavLink>
+                {sessionUser &&
+                    <NavLink className="group-link" exact to="/groups/new" style={{ float: "right", color: "#008294" }}>Start a group</NavLink>
+                }
+            </div>
+            <div>
                 {groups.map((group) => {
                     return (
                         <>
-                            <div className="card">
+                            <div className="card" onClick={() => history.push(`/groups/${group.id}`)}>
                                 <div className="cardimg">
-                                    <img className="img" alt="" src={group.previewImage}></img>
+                                    <img alt="" src={group.previewImage}></img>
                                 </div>
 
-                                <div className="cardtext">
-                                    <div>
-                                        <NavLink key={group.name} to={`/groups/${group.id}`}>{group.name}
-                                        </NavLink>
+                                <div className="card-content">
+
+                                    <div className="title" key={group.name} to={`/groups/${group.id}`}>{group.name}
                                     </div>
-                                    <br></br>
-                                    <div>
-                                        <span>
-                                            {group.city}
-                                        </span>
-                                        <span>, </span>
-                                        <span>
-                                            {group.state}
-                                        </span>
+
+                                    <div className="address" >
+                                        {group.city}, {group.state}
                                     </div>
-                                    <br></br>
-                                    <div>{group.about}</div>
-                                    <br></br>
-                                    <div>{group.name}</div>
-                                    <br></br>
-                                    <div>
-                                        <span>
-                                            {group.numMembers}
-                                        </span>
-                                        <span> members · </span>
-                                        <span>
-                                            {group.private === true ? 'Private' : 'Public'}
-                                        </span>
+                                    <div className="card-text">{group.about}</div>
+                                    <div className="card-text">
+                                        {group.numMembers} members · {group.private === true ? 'Private' : 'Public'}
                                     </div>
-                                    <br></br>
                                 </div>
                             </div>
-                            <hr></hr>
                         </>
                     );
                 })}
-            </ul >
+            </div>
         </div >
     )
 }
