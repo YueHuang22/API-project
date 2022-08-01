@@ -2,6 +2,12 @@
 
 This is a Meetup clone fullstack project. Meetup is a social media platform for hosting and organizing in-person and virtual activities, gatherings, and events for people and communities of similar interests, hobbies, and professions. In this project, users can create an user account and explore groups and events available. They can also create their own groups and events.
 
+### Here are the wiki links:
+* [API Routes](https://github.com/YueHuang22/API-project/wiki/API-Documentation)
+* [Database Schema](https://github.com/YueHuang22/API-project/wiki/Database-Schema)
+* [Feature List](https://github.com/YueHuang22/API-project/wiki/Feature-List)
+* [Redux State Shape](https://github.com/YueHuang22/API-project/wiki/Redux-State-Shape)
+
 ## Users
 
 * New users can create a new account with their first name, last name, email, and password. If user submit empty or invalid data, error messages will be showed.
@@ -25,71 +31,5 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 * If a group is deleted, all events belong to that group are deleted.
 
 
-## You can see all groups on Meetup
-
-/To be filled
-
-- you don't need authentication on this
-- /To be filled
-
-  - /To be filled
-  - /To be filled
-  - /To be filled
 
 
-## You can see all groups joined or organized by you
-
-To be filled
-
-- /To be filled
-- /To be filled
-
-  - To be filled
-  - To be filled
-  - To be filled
-
-
-## You can get details  of a group by its id
-
-To be filled
-
-- To be filled
-- To be filled
-
-  - To be filled
-  - To be filled
-  - To be filled
-
-## You can create a group
-
-To be filled
-
-- To be filled
-- To be filled
-
-  - To be filled
-  - To be filled
-
-
-
-## If you are the organizer, you can edit a group
-
-To be filled
-
-- To be filled
-- To be filled
-- To be filled
-
-
-
-## If you are the organizer, you can delete a group
-
-To be filled
-
-- To be filled
-- To be filled
-- To be filled
-
-  - To be filled
-  - To be filled
-  - To be filled
