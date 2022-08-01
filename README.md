@@ -2,6 +2,13 @@
 
 This is a Meetup clone fullstack project. Meetup is a social media platform for hosting and organizing in-person and virtual activities, gatherings, and events for people and communities of similar interests, hobbies, and professions. In this project, users can create an user account and explore groups and events available. They can also create their own groups and events.
 
+### List of technologies used.
+* Javascript
+* Express
+* NodeJS
+* SQLite & sequelize
+* React & Redux
+
 ### Here are the wiki links:
 * [API Routes](https://github.com/YueHuang22/API-project/wiki/API-Documentation)
 * [Database Schema](https://github.com/YueHuang22/API-project/wiki/Database-Schema)
