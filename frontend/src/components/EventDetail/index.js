@@ -2,7 +2,7 @@
 import { GoLocation } from 'react-icons/go'
 import { AiOutlineVideoCamera, AiOutlineClockCircle } from "react-icons/ai"
 import { useEffect } from 'react';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneEvent, deleteOneEvent } from '../../store/events';
 import "./EventDetail.css"
@@ -74,19 +74,20 @@ const EventDetail = () => {
                             </div>
                             <div className='blue-button-div'>
                                 <div>
-                                    <button className='group-detail-button'><NavLink exact to={`/events`} style={{ textDecoration: 'none', color: "white" }}>Back to List</NavLink></button>
+                                    <button className='group-detail-button' onClick={() => history.push("/events")}>Back to List</button>
                                 </div>
                                 <div className='blue-button-right'>
-                                    <button className='group-detail-button'><NavLink exact to={`/groups/${event.groupId}`} style={{ textDecoration: 'none', color: "white" }}>Back to this Group</NavLink></button>
+                                    <button className='group-detail-button' onClick={() => history.push(`/groups/${event.groupId}`)}>Back to this Group</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className='event-detail-button-div'>
                         <div>
-                            {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red'>
-                                <NavLink exact to={`/events/${eventId}/edit`} style={{ textDecoration: 'none', color: "white" }}>Edit</NavLink>
-                            </button>}
+                            {sessionUser && group.organizerId === sessionUser.id &&
+                                <button className='group-detail-button-red' onClick={() => history.push(`/events/${eventId}/edit`)}>
+                                    Edit
+                                </button>}
                         </div>
                         <div className='blue-button-right'>
                             {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red' onClick={handleClick}>Delete</button>}

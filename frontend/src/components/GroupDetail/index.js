@@ -1,7 +1,7 @@
 import { GrLocation } from 'react-icons/gr'
 import { BsPersonCircle, BsPeople, BsPerson } from 'react-icons/bs'
 import { useEffect } from 'react';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneGroup, deleteOneGroup } from '../../store/groups';
 import { getEventsForGroup } from '../../store/events';
@@ -18,7 +18,7 @@ const GroupDetail = () => {
         return state.group && state.group.length === 1 && state.group[0]
     })
 
-    let events = useSelector(state => state.event)
+    // let events = useSelector(state => state.event)
     let members = useSelector(state => state.member)
 
     useEffect(() => {
@@ -55,12 +55,13 @@ const GroupDetail = () => {
                             </div>
                             <div className='blue-button-div'>
                                 <div>
-                                    {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button'>
-                                        <NavLink exact to={`/groups/${group.id}/events/new`} style={{ textDecoration: 'none', color: "white" }}>Start an Event</NavLink>
-                                    </button>}
+                                    {sessionUser && group.organizerId === sessionUser.id &&
+                                        <button className='group-detail-button' onClick={() => history.push(`/groups/${group.id}/events/new`)}>
+                                            Start an Event
+                                        </button>}
                                 </div>
                                 <div className='blue-button-right'>
-                                    <button className='group-detail-button'><NavLink exact to={`/groups`} style={{ textDecoration: 'none', color: "white" }}>Back to List</NavLink></button>
+                                    <button className='group-detail-button' onClick={() => history.push("/groups")}>Back to List</button>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +74,10 @@ const GroupDetail = () => {
                                 <div>{group.about}</div>
                                 <div className='blue-button-div'>
                                     <div>
-                                        {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red'><NavLink exact to={`/groups/${groupId}/edit`} style={{ textDecoration: 'none', color: "white" }}>Edit</NavLink></button>}
+                                        {sessionUser && group.organizerId === sessionUser.id &&
+                                            <button className='group-detail-button-red' onClick={() => history.push(`/groups/${groupId}/edit`)}>
+                                                Edit
+                                            </button>}
                                     </div>
                                     <div className='blue-button-right'>
                                         {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red' onClick={handleClick}>Delete</button>}
