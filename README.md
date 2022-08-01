@@ -7,6 +7,7 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 * Express
 * NodeJS
 * SQLite & sequelize
+* HTML & CSS
 * React & Redux
 
 ### Here are the wiki links:
@@ -36,7 +37,3 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 * The organizer of the event can edit the information of the event. If user submit empty or invalid data, error messages will be showed.
 * The organizer of the event can delete the information of the event. 
 * If a group is deleted, all events belong to that group are deleted.
-
-
-
-
