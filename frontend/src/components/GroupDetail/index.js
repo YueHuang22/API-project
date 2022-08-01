@@ -38,7 +38,7 @@ const GroupDetail = () => {
         (group && (
             <div style={{ borderTop: "1px solid rgba(46,62,72,.12)" }}>
                 <div>
-                    <div className='container' style={{ display: "flex" }}>
+                    <div className='group-container' style={{ display: "flex" }}>
                         <img className='group-picture' alt='group' src={group.previewImage}></img>
                         <div className="group-header">
                             <h1 className='group-name'>
@@ -53,14 +53,32 @@ const GroupDetail = () => {
                             <div>
                                 <BsPerson /><span> Organized by <span style={{ fontWeight: "bold" }}>{group.organizer.firstName} {group.organizer.lastName[0].toUpperCase()}.</span></span>
                             </div>
+                            <div className='blue-button-div'>
+                                <div>
+                                    {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button'>
+                                        <NavLink exact to={`/groups/${group.id}/events/new`} style={{ textDecoration: 'none', color: "white" }}>Start an Event</NavLink>
+                                    </button>}
+                                </div>
+                                <div className='blue-button-right'>
+                                    <button className='group-detail-button'><NavLink exact to={`/groups`} style={{ textDecoration: 'none', color: "white" }}>Back to List</NavLink></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div style={{ height: "60px" }}></div>
                     <div className='group-body'>
-                        <div className='container'>
+                        <div className='group-container'>
                             <div className='group-details'>
                                 <div className='group-details-header'>What we're about</div>
                                 <div>{group.about}</div>
+                                <div className='blue-button-div'>
+                                    <div>
+                                        {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red'><NavLink exact to={`/groups/${groupId}/edit`} style={{ textDecoration: 'none', color: "white" }}>Edit</NavLink></button>}
+                                    </div>
+                                    <div className='blue-button-right'>
+                                        {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red' onClick={handleClick}>Delete</button>}
+                                    </div>
+                                </div>
                             </div>
                             <div className='group-members'>
                                 <div className='group-members-container'>
@@ -79,28 +97,10 @@ const GroupDetail = () => {
                                         </div>
                                     )}
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
-                    <button className='group-detail-button'><NavLink exact to={`/groups`} style={{ textDecoration: 'none', color: "white" }}>Back to List</NavLink></button>
-                    <br></br>
-
-                    {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button'><NavLink exact to={`/groups/${groupId}/edit`} style={{ textDecoration: 'none', color: "white" }}>Edit</NavLink></button>}
-                    <br></br>
-
-                    {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button' onClick={handleClick}>Delete</button>}
                 </div>
-
-                {
-                    sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button'>
-                        <span>
-                            <NavLink exact to={`/groups/${group.id}/events/new`} style={{ textDecoration: 'none', color: "white" }}>Start an Event</NavLink>
-                        </span>
-                    </button>
-                }
             </div >
         ))
     );
