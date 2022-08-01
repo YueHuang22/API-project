@@ -18,6 +18,9 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 
 ## Users
 
+* Landing page
+![Screen Shot 2022-08-01 at 10 09 29](https://user-images.githubusercontent.com/93162290/182166813-99191279-4c7a-4595-9c53-043e52439322.png)
+
 * New users can create a new account with their first name, last name, email, and password. If user submit empty or invalid data, error messages will be showed.
 * After signing up, users can log in with their account. If user submit empty or invalid data, error messages will be showed.
 * Users need to be logged in to use some functionalities, e.g. start a group. 
