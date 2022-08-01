@@ -11,7 +11,7 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 * React & Redux
 
 ### Please see below links to project Wiki:
-[* [API Routes](https://github.com/YueHuang22/API-project/wiki/API-Documentation)](https://meetup22.herokuapp.com/)
+* [API Routes](https://github.com/YueHuang22/API-project/wiki/API-Documentation)
 * [Database Schema](https://github.com/YueHuang22/API-project/wiki/Database-Schema)
 * [Feature List](https://github.com/YueHuang22/API-project/wiki/Feature-List)
 * [Redux State Shape](https://github.com/YueHuang22/API-project/wiki/Redux-State-Shape)
