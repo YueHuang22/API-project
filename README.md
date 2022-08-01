@@ -22,14 +22,20 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 ![Screen Shot 2022-08-01 at 10 09 29](https://user-images.githubusercontent.com/93162290/182166813-99191279-4c7a-4595-9c53-043e52439322.png)
 
 * New users can create a new account with their first name, last name, email, and password. If user submit empty or invalid data, error messages will be showed.
+![Screen Shot 2022-08-01 at 10 31 36](https://user-images.githubusercontent.com/93162290/182174509-3135563d-6e8e-4ffc-9d82-633021201a49.png)
+
 * After signing up, users can log in with their account. If user submit empty or invalid data, error messages will be showed.
 * Users need to be logged in to use some functionalities, e.g. start a group. 
+![Screen Shot 2022-08-01 at 10 30 56](https://user-images.githubusercontent.com/93162290/182174515-0958d642-2d42-4d19-a213-985e9793d860.png)
+
 * Users can log out of their account.
 
 ## Groups
 
 * Users can see all groups listed on groups page, and they can click on any group to see the group detail.
+![Screen Shot 2022-08-01 at 10 31 51](https://user-images.githubusercontent.com/93162290/182173716-7c4f709e-8fd4-4049-b245-a5e08c76bf4d.png)
 * Logged-in user can create a group by submitting a new group form. If user submit empty or invalid data, error messages will be showed.
+![Screen Shot 2022-08-01 at 10 32 14](https://user-images.githubusercontent.com/93162290/182173774-a4c456e2-c1da-4437-85cd-8b58a2b550cc.png)
 * The organizer of the group can edit the information of the group. If user submit empty or invalid data, error messages will be showed.
 * The organizer of the group can delete the information of the group. 
 
