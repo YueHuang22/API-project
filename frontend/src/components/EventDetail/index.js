@@ -6,6 +6,7 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneEvent, deleteOneEvent } from '../../store/events';
 import "./EventDetail.css"
+import { getOneGroup } from '../../store/groups';
 
 const EventDetail = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,10 @@ const EventDetail = () => {
     useEffect(() => {
         dispatch(getOneEvent(eventId));
     }, [dispatch, eventId]);
+
+    useEffect(() => {
+        dispatch(getOneGroup(event.groupId));
+    }, [dispatch, event])
 
 
     const handleClick = async (e) => {
@@ -65,20 +70,28 @@ const EventDetail = () => {
                                     {event.type === "online" ? (<AiOutlineVideoCamera />) : (<GoLocation />)}
                                     <div>{event.type === "online" ? 'Online event' : `${event.Group.city}, ${event.Group.state}`}</div>
                                 </div>
+
+                            </div>
+                            <div className='blue-button-div'>
+                                <div>
+                                    <button className='group-detail-button'><NavLink exact to={`/events`} style={{ textDecoration: 'none', color: "white" }}>Back to List</NavLink></button>
+                                </div>
+                                <div className='blue-button-right'>
+                                    <button className='group-detail-button'><NavLink exact to={`/groups/${event.groupId}`} style={{ textDecoration: 'none', color: "white" }}>Back to this Group</NavLink></button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-                    <diiv>
-                        <button><NavLink exact to={`/events`}>Back to List</NavLink></button>
-
-                        <button><NavLink exact to={`/groups/${event.groupId}`} >Back to this Group</NavLink></button>
-
-                        {sessionUser && group.organizerId === sessionUser.id && <button><NavLink exact to={`/events/${eventId}/edit`}>Edit</NavLink></button>}
-
-                        {sessionUser && group.organizerId === sessionUser.id && <button onClick={handleClick}>Delete</button>}
-                    </diiv>
-
+                    <div className='event-detail-button-div'>
+                        <div>
+                            {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red'>
+                                <NavLink exact to={`/events/${eventId}/edit`} style={{ textDecoration: 'none', color: "white" }}>Edit</NavLink>
+                            </button>}
+                        </div>
+                        <div className='blue-button-right'>
+                            {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button-red' onClick={handleClick}>Delete</button>}
+                        </div>
+                    </div>
                 </div>
             </div>
         ))
