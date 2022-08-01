@@ -51,7 +51,7 @@ const GroupDetail = () => {
                                 <BsPeople /><span> {group.numMembers} members · {group.private === true ? 'Private' : 'Public'} group</span>
                             </div>
                             <div>
-                                <BsPerson /><span> Organized by <span style={{ fontWeight: "bold" }}>{group.organizer.firstName} {group.organizer.lastName[0].toUpperCase()}.</span></span>
+                                <BsPerson /><span> Organized by <span style={{ fontWeight: "bold" }}>{group.organizer?.firstName} {group.organizer?.lastName[0].toUpperCase()}.</span></span>
                             </div>
                             <div className='blue-button-div'>
                                 <div>
@@ -89,7 +89,7 @@ const GroupDetail = () => {
                                     <div className='group-details-header'>Organizer</div>
                                     <div className='member'>
                                         <div><BsPersonCircle /></div>
-                                        <div>{group.organizer.firstName} {group.organizer.lastName}</div>
+                                        <div>{group.organizer?.firstName} {group.organizer?.lastName}</div>
                                     </div>
                                 </div>
                                 <div className='group-members-container'>
@@ -97,7 +97,7 @@ const GroupDetail = () => {
                                     {members && members.map((member) =>
                                         <div className='member'>
                                             <div><BsPersonCircle /></div>
-                                            <div>{member.firstName} {member.lastName}</div>
+                                            <div>{member?.firstName} {member?.lastName}</div>
                                         </div>
                                     )}
                                 </div>
