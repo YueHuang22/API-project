@@ -41,8 +41,10 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 
 ## Events
 
-* Users can see all events listed on events page, and they can click on any event to see the event detail.
+* Users can see all events listed on events page,and they can click on any event to see the event detail.
+![Screen Shot 2022-08-01 at 10 32 07](https://user-images.githubusercontent.com/93162290/182174697-d362e087-1f19-4b87-8782-ffc6c7564810.png)
 * Organizer of a group can create events for that group. If user submit empty or invalid data, error messages will be showed.
+![Screen Shot 2022-08-01 at 10 32 27](https://user-images.githubusercontent.com/93162290/182174833-c77545ae-f04a-444a-b456-952ca28f6a91.png)
 * The organizer of the event can edit the information of the event. If user submit empty or invalid data, error messages will be showed.
 * The organizer of the event can delete the information of the event. 
 * If a group is deleted, all events belong to that group are deleted.
