@@ -43,7 +43,6 @@ function SignupFormPage() {
 
     return (
         <div className="signup-form-page">
-
             <form className="signup-form" onSubmit={handleSubmit}>
                 <div className="signup-form-title">Signing up</div>
                 <div className="signup-errors">

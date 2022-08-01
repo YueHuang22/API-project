@@ -20,5 +20,14 @@
 
 #modal-content {
   position: absolute;
-  background-color:white;
+  background-color: white;
+}
+
+.login-modal {
+  height: 600px;
+  width: 450px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
