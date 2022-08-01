@@ -1,8 +1,8 @@
 # Meetup
 
-This is a Meetup clone fullstack project. Meetup is a social media platform for hosting and organizing in-person and virtual activities, gatherings, and events for people and communities of similar interests, hobbies, and professions. In this project, users can create an user account and explore groups and events available. They can also create their own groups and events.
+This is a Meetup clone fullstack project. Meetup is a social media platform for hosting and organizing in-person and virtual activities, gatherings, and events for people and communities of similar interests, hobbies, and professions. In this project, users can create an user account and explore groups and events available. They can also create their own groups and events. * [Click here to view Project Live Site](https://meetup22.herokuapp.com/)
 
-### List of technologies used.
+### This project is built with:
 * Javascript
 * Express
 * NodeJS
@@ -10,8 +10,8 @@ This is a Meetup clone fullstack project. Meetup is a social media platform for 
 * HTML & CSS
 * React & Redux
 
-### Here are the wiki links:
-* [API Routes](https://github.com/YueHuang22/API-project/wiki/API-Documentation)
+### Please see below links to project Wiki:
+[* [API Routes](https://github.com/YueHuang22/API-project/wiki/API-Documentation)](https://meetup22.herokuapp.com/)
 * [Database Schema](https://github.com/YueHuang22/API-project/wiki/Database-Schema)
 * [Feature List](https://github.com/YueHuang22/API-project/wiki/Feature-List)
 * [Redux State Shape](https://github.com/YueHuang22/API-project/wiki/Redux-State-Shape)
