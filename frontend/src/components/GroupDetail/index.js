@@ -85,18 +85,19 @@ const GroupDetail = () => {
 
                     </div>
 
-                    <button><NavLink exact to={`/groups`}>Back to List</NavLink></button>
+                    <button className='group-detail-button'><NavLink exact to={`/groups`} style={{ textDecoration: 'none', color: "white" }}>Back to List</NavLink></button>
                     <br></br>
 
-                    {sessionUser && group.organizerId === sessionUser.id && <button><NavLink exact to={`/groups/${groupId}/edit`}>Edit</NavLink></button>}
+                    {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button'><NavLink exact to={`/groups/${groupId}/edit`} style={{ textDecoration: 'none', color: "white" }}>Edit</NavLink></button>}
+                    <br></br>
 
-                    {sessionUser && group.organizerId === sessionUser.id && <button onClick={handleClick}>Delete</button>}
+                    {sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button' onClick={handleClick}>Delete</button>}
                 </div>
 
                 {
-                    sessionUser && group.organizerId === sessionUser.id && <button>
+                    sessionUser && group.organizerId === sessionUser.id && <button className='group-detail-button'>
                         <span>
-                            <NavLink exact to={`/groups/${group.id}/events/new`}>Start an Event</NavLink>
+                            <NavLink exact to={`/groups/${group.id}/events/new`} style={{ textDecoration: 'none', color: "white" }}>Start an Event</NavLink>
                         </span>
                     </button>
                 }

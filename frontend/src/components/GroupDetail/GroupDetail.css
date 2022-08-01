@@ -79,3 +79,14 @@
     height: 50px;
     width: 50px;
 }
+
+.group-detail-button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    fill: #fff;
+    padding: 10px 18px;
+    background-color: #008294;
+    border-color: #008294;
+}

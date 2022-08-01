@@ -1,0 +1,77 @@
+.container {
+    padding-top: 20px;
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-date {
+    color: rgb(117, 117, 117)
+}
+
+.container>.event-name {
+    font-size: 36px;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+.event-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.event-body>div:first-child {
+    width: 670px;
+}
+
+.event-body>div:first-child img {
+    width: 100%;
+    height: 370px;
+    object-fit: cover;
+}
+
+.event-body>div:last-child {
+    width: 350px;
+    margin-left: 150px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.event-body>div:last-child>div {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.event-body>div:last-child>div:first-child>div:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.event-body>div:last-child>div:first-child>div:last-child {
+    font-size: 14px;
+    color: #757575;
+}
+
+.event-body>div:last-child>div:last-child>div {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+}
+
+.event-body>div:last-child>div:last-child>div:first-child {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.event-body>div:last-child>div:last-child svg {
+    height: 24px;
+    width: 24px;
+    color: #757575;
+    margin-right: 15px;
+}
